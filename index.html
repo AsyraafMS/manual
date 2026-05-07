@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eHadir@SMKBN Documentation Repository</title>
+  <style>
+    :root {
+      --brand: #1565C0;
+      --brand-dark: #0D47A1;
+      --accent: #0288D1;
+      --text: #212121;
+      --muted: #616161;
+      --border: #E0E0E0;
+      --bg: #F5F7FA;
+      --white: #FFFFFF;
+      --shadow: 0 2px 12px rgba(0, 0, 0, .08);
+      --radius: 12px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      padding: .45rem 1.25rem;
+    }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .lang-toggle span {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .3px;
+      transition: color .2s;
+    }
+
+    .lang-toggle span.active-lang {
+      color: var(--brand-dark);
+    }
+
+    .toggle-track {
+      width: 44px;
+      height: 24px;
+      background: #CBD5E1;
+      border-radius: 99px;
+      position: relative;
+      cursor: pointer;
+      transition: background .2s;
+      border: none;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .toggle-track.on {
+      background: var(--brand);
+    }
+
+    .toggle-thumb {
+      width: 18px;
+      height: 18px;
+      background: var(--white);
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      transition: transform .2s;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+    }
+
+    .toggle-track.on .toggle-thumb {
+      transform: translateX(20px);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, var(--brand-dark), var(--accent));
+      color: var(--white);
+      padding: 3.5rem 1.5rem 3rem;
+      text-align: center;
+    }
+
+    .header-eyebrow {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: .7;
+      margin-bottom: .75rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -.3px;
+      line-height: 1.25;
+    }
+
+    header p {
+      margin-top: .6rem;
+      font-size: .95rem;
+      opacity: .8;
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 1.25rem 4rem;
+    }
+
+    .section-label {
+      font-size: .7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: .4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── CARDS ── */
+    .doc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 540px) {
+      .doc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .doc-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow .18s, transform .18s, border-color .18s;
+    }
+
+    .doc-card:hover {
+      box-shadow: 0 6px 24px rgba(21, 101, 192, .15);
+      border-color: #90CAF9;
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    .doc-card-icon {
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: .25rem;
+    }
+
+    .doc-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+    }
+
+    .doc-card-desc {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .doc-card-link {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--brand);
+      margin-top: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+    }
+
+    .doc-card-link::after {
+      content: "→";
+      transition: transform .15s;
+    }
+
+    .doc-card:hover .doc-card-link::after {
+      transform: translateX(3px);
+    }
+
+    footer {
+      text-align: center;
+      font-size: .78rem;
+      color: var(--muted);
+      padding: 1.5rem 1rem;
+      border-top: 1px solid var(--border);
+      background: var(--white);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── TOP BAR ── -->
+  <div class="top-bar">
+    <div class="lang-toggle">
+      <span id="lbl-en" class="active-lang">EN</span>
+      <button class="toggle-track" id="lang-toggle" aria-label="Toggle language">
+        <div class="toggle-thumb"></div>
+      </button>
+      <span id="lbl-ms">BM</span>
+    </div>
+  </div>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <img src="logo.png" alt="SMK Bukit Naning Logo"
+      style="height:90px;width:auto;margin-bottom:1rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3));">
+    <div class="header-eyebrow">eHadir@SMKBN</div>
+    <h1 data-i18n="title">eHadir@SMKBN Documentation Repository</h1>
+    <p data-i18n="subtitle">All guides and reference materials for the eHadir@SMKBN system</p>
+  </header>
+
+  <main>
+    <div class="section-label" data-i18n="section-label">Documents</div>
+
+    <div class="doc-grid">
+
+      <a class="doc-card" href="user-guide.html">
+        <div class="doc-card-icon">📱</div>
+        <div class="doc-card-title" data-i18n="ug-title">User Guide</div>
+        <div class="doc-card-desc" data-i18n="ug-desc">Step-by-step workflows for each role — Staff, Teacher,
+          Administrator, Principal, and System Admin. Available in English and Bahasa Melayu.</div>
+        <div class="doc-card-link" data-i18n="ug-link">Open guide</div>
+      </a>
+
+      <a class="doc-card" href="product-manual.html">
+        <div class="doc-card-icon">📖</div>
+        <div class="doc-card-title" data-i18n="pm-title">Product Manual</div>
+        <div class="doc-card-desc" data-i18n="pm-desc">Full technical reference covering every feature, permission,
+          input, output, and relevant file path in the system.</div>
+        <div class="doc-card-link" data-i18n="pm-link">Open manual</div>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    <span data-i18n="footer">eHadir@SMKBN · Documentation Repository · Muhammad Asyraaf · 2026</span>
+  </footer>
+
+  <script>
+    const T = {
+      en: {
+        "title": "eHadir@SMKBN Documentation Repository",
+        "subtitle": "All guides and reference materials for the eHadir@SMKBN system",
+        "section-label": "Documents",
+        "ug-title": "User Guide",
+        "ug-desc": "Step-by-step workflows for each role — Staff, Teacher, Administrator, Principal, and System Admin. Available in English and Bahasa Melayu.",
+        "ug-link": "Open guide",
+        "pm-title": "Product Manual",
+        "pm-desc": "Full technical reference covering every feature, permission, input, output, and relevant file path in the system.",
+        "pm-link": "Open manual",
+        "footer": "eHadir@SMKBN · Documentation Repository · Muhammad Asyraaf · 2026"
+      },
+      ms: {
+        "title": "Repositori Dokumentasi eHadir@SMKBN",
+        "subtitle": "Semua panduan dan bahan rujukan untuk sistem eHadir@SMKBN",
+        "section-label": "Dokumen",
+        "ug-title": "Panduan Pengguna",
+        "ug-desc": "Aliran kerja langkah demi langkah untuk setiap peranan — Kakitangan, Guru, Pentadbir, Pengetua, dan Pentadbir Sistem. Tersedia dalam Bahasa Inggeris dan Bahasa Melayu.",
+        "ug-link": "Buka panduan",
+        "pm-title": "Manual Produk",
+        "pm-desc": "Rujukan teknikal penuh merangkumi setiap ciri, kebenaran, input, output, dan laluan fail yang berkaitan dalam sistem.",
+        "pm-link": "Buka manual",
+        "footer": "eHadir@SMKBN · Repositori Dokumentasi"
+      }
+    };
+
+    let lang = localStorage.getItem('ug-lang') || 'en';
+
+    function applyLang(l) {
+      lang = l;
+      localStorage.setItem('ug-lang', l);
+      document.documentElement.lang = l;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = T[l][el.dataset.i18n];
+        if (v !== undefined) el.textContent = v;
+      });
+
+      const track = document.getElementById('lang-toggle');
+      const lblEn = document.getElementById('lbl-en');
+      const lblMs = document.getElementById('lbl-ms');
+      if (l === 'ms') {
+        track.classList.add('on');
+        lblEn.classList.remove('active-lang');
+        lblMs.classList.add('active-lang');
+      } else {
+        track.classList.remove('on');
+        lblEn.classList.add('active-lang');
+        lblMs.classList.remove('active-lang');
+      }
+    }
+
+    document.getElementById('lang-toggle').addEventListener('click', () => {
+      applyLang(lang === 'en' ? 'ms' : 'en');
+    });
+
+    applyLang(lang);
+  </script>
+</body>
+
+</html>

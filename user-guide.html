@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eHadir@SMKBN — User Guide</title>
+  <style>
+    :root {
+      --brand: #1565C0;
+      --brand-light: #E3F2FD;
+      --brand-dark: #0D47A1;
+      --accent: #0288D1;
+      --green: #2E7D32;
+      --green-light: #E8F5E9;
+      --orange: #E65100;
+      --orange-light: #FFF3E0;
+      --purple: #6A1B9A;
+      --purple-light: #F3E5F5;
+      --red: #C62828;
+      --red-light: #FFEBEE;
+      --teal: #00695C;
+      --teal-light: #E0F2F1;
+      --text: #212121;
+      --muted: #757575;
+      --border: #E0E0E0;
+      --bg: #F5F7FA;
+      --white: #FFFFFF;
+      --radius: 10px;
+      --shadow: 0 2px 8px rgba(0, 0, 0, .08);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg)
+    }
+
+    a {
+      color: var(--brand);
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .site-header {
+      background: linear-gradient(135deg, var(--brand-dark) 0%, var(--accent) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem
+    }
+
+    .site-header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -.3px
+    }
+
+    .site-header p {
+      font-size: 1.05rem;
+      opacity: .85;
+      margin-top: .5rem
+    }
+
+    .site-header .tagline {
+      display: inline-block;
+      background: rgba(255, 255, 255, .15);
+      border-radius: 99px;
+      padding: .3rem 1rem;
+      font-size: .82rem;
+      margin-top: 1rem;
+      letter-spacing: .3px
+    }
+
+    .role-nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .06)
+    }
+
+    .role-nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      gap: .25rem;
+      padding: .6rem 1rem;
+      overflow-x: auto;
+      align-items: center
+    }
+
+    .role-nav-label {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      white-space: nowrap;
+      padding-right: .5rem
+    }
+
+    .role-btn {
+      border: none;
+      border-radius: 99px;
+      padding: .42rem 1rem;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .18s;
+      background: var(--bg);
+      color: var(--muted)
+    }
+
+    .role-btn:hover {
+      filter: brightness(.95)
+    }
+
+    .role-btn.active {
+      color: var(--white)
+    }
+
+    .role-btn[data-role="staff"].active {
+      background: var(--green)
+    }
+
+    .role-btn[data-role="teacher"].active {
+      background: var(--teal)
+    }
+
+    .role-btn[data-role="adminstaff"].active {
+      background: var(--accent)
+    }
+
+    .role-btn[data-role="admin"].active {
+      background: var(--orange)
+    }
+
+    .role-btn[data-role="principal"].active {
+      background: var(--purple)
+    }
+
+    .role-btn[data-role="sysadmin"].active {
+      background: var(--red)
+    }
+
+    .nav-spacer {
+      flex: 1
+    }
+
+    /* Language toggle */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      flex-shrink: 0;
+      padding-left: .75rem;
+      border-left: 1px solid var(--border)
+    }
+
+    .lang-toggle span {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .3px;
+      transition: color .2s
+    }
+
+    .lang-toggle span.active-lang {
+      color: var(--brand-dark)
+    }
+
+    .toggle-track {
+      width: 44px;
+      height: 24px;
+      background: #CBD5E1;
+      border-radius: 99px;
+      position: relative;
+      cursor: pointer;
+      transition: background .2s;
+      flex-shrink: 0;
+      border: none;
+      padding: 0
+    }
+
+    .toggle-track.on {
+      background: var(--brand)
+    }
+
+    .toggle-thumb {
+      width: 18px;
+      height: 18px;
+      background: var(--white);
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      transition: transform .2s;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .2)
+    }
+
+    .toggle-track.on .toggle-thumb {
+      transform: translateX(20px)
+    }
+
+    .page-body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 5rem
+    }
+
+    .role-section {
+      display: none
+    }
+
+    .role-section.visible {
+      display: block
+    }
+
+    .role-hero {
+      border-radius: var(--radius);
+      padding: 1.6rem 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem
+    }
+
+    .role-hero-icon {
+      font-size: 2.8rem;
+      line-height: 1;
+      flex-shrink: 0
+    }
+
+    .role-hero h2 {
+      font-size: 1.5rem;
+      font-weight: 800
+    }
+
+    .role-hero p {
+      font-size: .92rem;
+      margin-top: .3rem;
+      opacity: .85
+    }
+
+    .hero-staff {
+      background: var(--green-light);
+      color: var(--green)
+    }
+
+    .hero-teacher {
+      background: var(--teal-light);
+      color: var(--teal)
+    }
+
+    .hero-adminstaff {
+      background: var(--brand-light);
+      color: var(--brand-dark)
+    }
+
+    .hero-admin {
+      background: var(--orange-light);
+      color: var(--orange)
+    }
+
+    .hero-principal {
+      background: var(--purple-light);
+      color: var(--purple)
+    }
+
+    .hero-sysadmin {
+      background: var(--red-light);
+      color: var(--red)
+    }
+
+    .flow-group {
+      margin-bottom: 2.5rem
+    }
+
+    .flow-group-title {
+      font-size: .7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: .85rem;
+      padding-bottom: .4rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .flow-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      border: 1px solid var(--border)
+    }
+
+    .flow-card-top {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      padding: .9rem 1.25rem;
+      cursor: pointer;
+      user-select: none
+    }
+
+    .flow-card-top:hover {
+      background: #FAFAFA
+    }
+
+    .flow-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0
+    }
+
+    .flow-card-title {
+      font-weight: 700;
+      font-size: .95rem;
+      flex: 1
+    }
+
+    .flow-chevron {
+      font-size: .7rem;
+      color: var(--muted);
+      transition: transform .2s
+    }
+
+    .flow-card.open .flow-chevron {
+      transform: rotate(180deg)
+    }
+
+    .flow-card-body {
+      display: none;
+      padding: 0 1.25rem 1.1rem;
+      border-top: 1px solid var(--border)
+    }
+
+    .flow-card.open .flow-card-body {
+      display: block
+    }
+
+    .steps {
+      list-style: none;
+      padding: .75rem 0 0
+    }
+
+    .steps li {
+      display: flex;
+      gap: .85rem;
+      margin-bottom: .6rem;
+      font-size: .9rem;
+      align-items: flex-start
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: var(--white);
+      font-size: .7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: .15rem
+    }
+
+    .tip {
+      background: var(--brand-light);
+      border-left: 3px solid var(--brand);
+      border-radius: 0 6px 6px 0;
+      padding: .6rem .9rem;
+      font-size: .85rem;
+      margin-top: .9rem;
+      color: var(--brand-dark)
+    }
+
+    .note {
+      background: var(--orange-light);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 6px 6px 0;
+      padding: .6rem .9rem;
+      font-size: .85rem;
+      margin-top: .9rem;
+      color: var(--orange)
+    }
+
+    .ic-blue {
+      background: var(--brand-light)
+    }
+
+    .ic-green {
+      background: var(--green-light)
+    }
+
+    .ic-orange {
+      background: var(--orange-light)
+    }
+
+    .ic-purple {
+      background: var(--purple-light)
+    }
+
+    .ic-red {
+      background: var(--red-light)
+    }
+
+    .ic-teal {
+      background: var(--teal-light)
+    }
+
+    footer {
+      text-align: center;
+      font-size: .8rem;
+      color: var(--muted);
+      padding: 2rem 1rem;
+      border-top: 1px solid var(--border);
+      background: var(--white)
+    }
+
+    @media(max-width:600px) {
+      .site-header h1 {
+        font-size: 1.6rem
+      }
+
+      .role-hero {
+        flex-direction: column;
+        gap: .75rem
+      }
+
+      .role-hero-icon {
+        font-size: 2rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <img src="logo.png" alt="SMK Bukit Naning Logo"
+      style="height:90px;width:auto;margin-bottom:1rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3));">
+    <h1>eHadir@SMKBN</h1>
+    <p data-i18n="header-sub">Your guide to using the system — step by step</p>
+    <span class="tagline" data-i18n="header-tagline">Select your role below to see your guide</span>
+  </header>
+
+  <nav class="role-nav">
+    <div class="role-nav-inner">
+      <span class="role-nav-label" data-i18n="nav-iam">I am a:</span>
+      <button class="role-btn active" data-role="staff" data-i18n="role-staff">Staff</button>
+      <button class="role-btn" data-role="teacher" data-i18n="role-teacher">Teacher</button>
+      <button class="role-btn" data-role="adminstaff" data-i18n="role-adminstaff">Administrative Staff</button>
+      <button class="role-btn" data-role="admin" data-i18n="role-admin">Administrator</button>
+      <button class="role-btn" data-role="principal" data-i18n="role-principal">Principal</button>
+      <button class="role-btn" data-role="sysadmin" data-i18n="role-sysadmin">System Admin</button>
+      <div class="nav-spacer"></div>
+      <div class="lang-toggle">
+        <span id="lbl-en" class="active-lang">EN</span>
+        <button class="toggle-track" id="lang-toggle" aria-label="Toggle language">
+          <div class="toggle-thumb"></div>
+        </button>
+        <span id="lbl-ms">BM</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-body">
+
+    <!-- ═══ STAFF ═══ -->
+    <section class="role-section visible" data-role="staff">
+      <div class="role-hero hero-staff">
+        <div class="role-hero-icon">🧑‍💼</div>
+        <div>
+          <h2 data-i18n="staff-title">Staff</h2>
+          <p data-i18n="staff-desc">As a staff member, you can check in and out of work, apply for leave, view your
+            attendance history, and manage your profile — all from your phone.</p>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="grp-start">Getting Started</div>
+
+        <div class="flow-card open">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-blue">🚀</div>
+            <span class="flow-card-title" data-i18n="staff-setup-t">First-time setup</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-setup-b"></div>
+        </div>
+
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-green">🔑</div>
+            <span class="flow-card-title" data-i18n="staff-login-t">Logging in</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-login-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="grp-daily">Daily Attendance</div>
+
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-green">📍</div>
+            <span class="flow-card-title" data-i18n="staff-checkin-t">Checking in when you arrive</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-checkin-b"></div>
+        </div>
+
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-green">🏁</div>
+            <span class="flow-card-title" data-i18n="staff-checkout-t">Checking out when you leave</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-checkout-b"></div>
+        </div>
+
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-blue">📋</div>
+            <span class="flow-card-title" data-i18n="staff-history-t">Viewing your attendance history</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-history-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="grp-requests">Attendance Requests</div>
+
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-orange">✏️</div>
+            <span class="flow-card-title" data-i18n="staff-manual-t">Submitting a manual check-in or check-out
+              request</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-manual-b"></div>
+        </div>
+
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-orange">🚗</div>
+            <span class="flow-card-title" data-i18n="staff-outstation-t">Submitting an outstation request</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-outstation-b"></div>
+        </div>
+
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-orange">⚠️</div>
+            <span class="flow-card-title" data-i18n="staff-exception-t">Submitting an exception request</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-exception-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="grp-leave">Leave</div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-purple">🌴</div>
+            <span class="flow-card-title" data-i18n="staff-leave-t">Applying for leave</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-leave-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="grp-warn-prof">Warnings &amp; Profile</div>
+
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-red">📩</div>
+            <span class="flow-card-title" data-i18n="staff-warnings-t">Viewing warning letters</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-warnings-b"></div>
+        </div>
+
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-blue">👤</div>
+            <span class="flow-card-title" data-i18n="staff-profile-t">Updating your profile &amp; password</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-profile-b"></div>
+        </div>
+
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-blue">🔔</div>
+            <span class="flow-card-title" data-i18n="staff-notif-t">Reading notifications</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="staff-notif-b"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TEACHER ═══ -->
+    <section class="role-section" data-role="teacher">
+      <div class="role-hero hero-teacher">
+        <div class="role-hero-icon">🍎</div>
+        <div>
+          <h2 data-i18n="teacher-title">Teacher</h2>
+          <p data-i18n="teacher-desc">Your workflow is identical to Staff, with one difference: school holidays that
+            apply specifically to teachers are automatically accounted for in your attendance records.</p>
+        </div>
+      </div>
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="teacher-grp">Everything Staff Can Do</div>
+        <div class="flow-card open">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-teal">📋</div>
+            <span class="flow-card-title" data-i18n="teacher-card-t">Full workflow — same as Staff</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="teacher-card-b"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ADMIN STAFF ═══ -->
+    <section class="role-section" data-role="adminstaff">
+      <div class="role-hero hero-adminstaff">
+        <div class="role-hero-icon">🗂️</div>
+        <div>
+          <h2 data-i18n="adminstaff-title">Administrative Staff</h2>
+          <p data-i18n="adminstaff-desc">Your access is the same as a regular Staff member — check in, view history,
+            apply for leave, and manage your profile.</p>
+        </div>
+      </div>
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="adminstaff-grp">Your Features</div>
+        <div class="flow-card open">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-blue">📋</div>
+            <span class="flow-card-title" data-i18n="adminstaff-card-t">Full workflow — same as Staff</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="adminstaff-card-b"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ADMINISTRATOR ═══ -->
+    <section class="role-section" data-role="admin">
+      <div class="role-hero hero-admin">
+        <div class="role-hero-icon">🛠️</div>
+        <div>
+          <h2 data-i18n="admin-title">Administrator</h2>
+          <p data-i18n="admin-desc">As an administrator you can do everything a staff member can, plus manage your
+            entire team — approve leave, review requests, monitor attendance, issue warnings, and send announcements.
+          </p>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="admin-grp-access">Getting to the Admin Dashboard</div>
+        <div class="flow-card open">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-orange">🏠</div>
+            <span class="flow-card-title" data-i18n="admin-access-t">Accessing the admin area</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="admin-access-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="admin-grp-monitor">Monitoring Attendance</div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-green">📊</div>
+            <span class="flow-card-title" data-i18n="admin-overview-t">Viewing today's attendance overview</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="admin-overview-b"></div>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-green">📄</div>
+            <span class="flow-card-title" data-i18n="admin-reports-t">Generating attendance reports</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="admin-reports-b"></div>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-orange">🚨</div>
+            <span class="flow-card-title" data-i18n="admin-violations-t">Handling violations</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="admin-violations-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="admin-grp-att-req">Managing Attendance Requests</div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-orange">✅</div>
+            <span class="flow-card-title" data-i18n="admin-att-req-t">Approving or rejecting attendance requests</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="admin-att-req-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="admin-grp-leave">Managing Leave</div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-purple">🌴</div>
+            <span class="flow-card-title" data-i18n="admin-leave-t">Approving or rejecting leave requests</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="admin-leave-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="admin-grp-staff">Managing Staff</div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-blue">👥</div>
+            <span class="flow-card-title" data-i18n="admin-dir-t">Viewing the staff directory</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="admin-dir-b"></div>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-blue">➕</div>
+            <span class="flow-card-title" data-i18n="admin-reg-t">Registering a new staff member</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="admin-reg-b"></div>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-red">✉️</div>
+            <span class="flow-card-title" data-i18n="admin-warn-t">Issuing a warning letter</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="admin-warn-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="grp-settings">Settings</div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-teal">🗓️</div>
+            <span class="flow-card-title" data-i18n="admin-holiday-t">Adding a special holiday</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="admin-holiday-b"></div>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-blue">📢</div>
+            <span class="flow-card-title" data-i18n="admin-announce-t">Sending an announcement</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="admin-announce-b"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PRINCIPAL ═══ -->
+    <section class="role-section" data-role="principal">
+      <div class="role-hero hero-principal">
+        <div class="role-hero-icon">🎓</div>
+        <div>
+          <h2 data-i18n="principal-title">Principal</h2>
+          <p data-i18n="principal-desc">Your access is identical to an Administrator. You have full visibility of all
+            staff attendance, can approve leave, issue warnings, register new staff, and configure school settings.</p>
+        </div>
+      </div>
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="principal-grp">Your Capabilities</div>
+        <div class="flow-card open">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-purple">📋</div>
+            <span class="flow-card-title" data-i18n="principal-card-t">Full workflow — same as Administrator</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="principal-card-b"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SYSTEM ADMIN ═══ -->
+    <section class="role-section" data-role="sysadmin">
+      <div class="role-hero hero-sysadmin">
+        <div class="role-hero-icon">⚙️</div>
+        <div>
+          <h2 data-i18n="sysadmin-title">System Administrator</h2>
+          <p data-i18n="sysadmin-desc">You manage the technical backbone of the system — the attendance zone, trusted
+            networks, device security, and staff account recovery. You do not have a personal attendance record.</p>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="sysadmin-grp-zone">Attendance Zone</div>
+        <div class="flow-card open">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-red">📍</div>
+            <span class="flow-card-title" data-i18n="sysadmin-geo-t">Setting up or changing the geofence</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="sysadmin-geo-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="sysadmin-grp-wifi">Trusted Wi-Fi Networks</div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-red">📶</div>
+            <span class="flow-card-title" data-i18n="sysadmin-wifi-t">Adding a trusted Wi-Fi network</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="sysadmin-wifi-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="sysadmin-grp-dev">Device Security</div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-red">🔒</div>
+            <span class="flow-card-title" data-i18n="sysadmin-dev-t">Reviewing and flagging suspicious devices</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="sysadmin-dev-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="sysadmin-grp-pw">Password Recovery</div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-orange">🔑</div>
+            <span class="flow-card-title" data-i18n="sysadmin-pw-t">Approving a staff password reset request</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="sysadmin-pw-b"></div>
+        </div>
+      </div>
+
+      <div class="flow-group">
+        <div class="flow-group-title" data-i18n="sysadmin-grp-mgmt">Staff &amp; School Management</div>
+        <div class="flow-card">
+          <div class="flow-card-top">
+            <div class="flow-icon ic-blue">👥</div>
+            <span class="flow-card-title" data-i18n="sysadmin-mgmt-t">Everything an Administrator can do</span>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-card-body" data-i18n-html="sysadmin-mgmt-b"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <span data-i18n="footer">eHadir@SMKBN · Staff Attendance &amp; HR Management · User Guide v1.0 · Muhammad
+      Asyraaf</span>
+  </footer>
+
+  <script>
+    const T = {
+      en: {
+        /* ── nav / header ── */
+        "header-sub": "Your guide to using the system — step by step",
+        "header-tagline": "Select your role below to see your guide",
+        "nav-iam": "I am a:",
+        "role-staff": "Staff",
+        "role-teacher": "Teacher",
+        "role-adminstaff": "Administrative Staff",
+        "role-admin": "Administrator",
+        "role-principal": "Principal",
+        "role-sysadmin": "System Admin",
+        "footer": "eHadir@SMKBN · Staff Attendance & HR Management · User Guide v1.0 · Muhammad Asyraaf · 2026",
+
+        /* ── shared group labels ── */
+        "grp-start": "Getting Started",
+        "grp-daily": "Daily Attendance",
+        "grp-requests": "Attendance Requests",
+        "grp-leave": "Leave",
+        "grp-warn-prof": "Warnings & Profile",
+        "grp-settings": "Settings",
+
+        /* ── STAFF ── */
+        "staff-title": "Staff",
+        "staff-desc": "As a staff member, you can check in and out of work, apply for leave, view your attendance history, and manage your profile — all from your phone.",
+        "staff-setup-t": "First-time setup",
+        "staff-setup-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Open the app. On first launch you will see a welcome screen — tap <strong>Continue</strong>.</li>
+      <li><span class="step-num">2</span>Allow <strong>location access</strong> and <strong>notification access</strong> when prompted. Both are needed for attendance tracking.</li>
+      <li><span class="step-num">3</span>On the login screen, enter the email and temporary password given to you by your administrator, then tap <strong>Log In</strong>.</li>
+      <li><span class="step-num">4</span>Go to your <strong>Profile → Edit Profile</strong> and change your password to something personal.</li>
+    </ol>
+    <div class="tip"><strong>Tip:</strong> Enable "Remember Me" on the login screen so you only need to log in once.</div>`,
+
+        "staff-login-t": "Logging in",
+        "staff-login-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Open the app and enter your email (or phone number) and password.</li>
+      <li><span class="step-num">2</span>Tap <strong>Log In</strong>. You will land on the Home screen.</li>
+    </ol>
+    <div class="tip"><strong>Forgot your password?</strong> Tap "Forgot password?" on the login screen, enter your email or phone, and follow the instructions sent to you.</div>`,
+
+        "staff-checkin-t": "Checking in when you arrive",
+        "staff-checkin-b": `<ol class="steps">
+      <li><span class="step-num">1</span>When you arrive at the school premises, open the app.</li>
+      <li><span class="step-num">2</span>A <strong>Check-In popup</strong> will appear automatically once your phone detects you are within the school zone.</li>
+      <li><span class="step-num">3</span>Tap <strong>Check In</strong> to record your arrival. A confirmation notification will appear.</li>
+    </ol>
+    <div class="tip"><strong>Tip:</strong> Make sure your phone's location (GPS) is switched on before you arrive, so the popup can appear.</div>
+    <div class="note"><strong>Late?</strong> If you arrive after your scheduled start time, your record will be flagged as a late arrival.</div>`,
+
+        "staff-checkout-t": "Checking out when you leave",
+        "staff-checkout-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Before leaving the premises, open the app.</li>
+      <li><span class="step-num">2</span>The app will prompt you to check out, or you can tap <strong>Check Out</strong> on the Home screen.</li>
+      <li><span class="step-num">3</span>Your departure time is recorded.</li>
+    </ol>
+    <div class="tip"><strong>Tip:</strong> If you forget to check out, you can submit a <strong>Manual Check-Out Request</strong> (see below).</div>`,
+
+        "staff-history-t": "Viewing your attendance history",
+        "staff-history-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Tap <strong>History</strong> in the bottom navigation bar.</li>
+      <li><span class="step-num">2</span>Use the month/year selector to browse past months.</li>
+      <li><span class="step-num">3</span>Green entries are complete (checked in and out). Highlighted entries are incomplete or flagged.</li>
+      <li><span class="step-num">4</span>The summary at the top shows your total days present, late arrivals, and absences for the month.</li>
+    </ol>`,
+
+        "staff-manual-t": "Submitting a manual check-in or check-out request",
+        "staff-manual-b": `<p style="font-size:.9rem;padding-top:.75rem">Use this if you forgot to check in or check out on a past day.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>From the Home screen, tap the <strong>Requests</strong> shortcut, or go to <strong>History</strong> and tap the request button.</li>
+      <li><span class="step-num">2</span>Choose <strong>Manual Check-In</strong> or <strong>Manual Check-Out</strong>.</li>
+      <li><span class="step-num">3</span>Select the date and the time you actually arrived or left.</li>
+      <li><span class="step-num">4</span>Tap <strong>Submit</strong>. Your request is sent to your administrator for approval.</li>
+      <li><span class="step-num">5</span>You will receive a notification once the request is approved or rejected.</li>
+    </ol>`,
+
+        "staff-outstation-t": "Submitting an outstation request",
+        "staff-outstation-b": `<p style="font-size:.9rem;padding-top:.75rem">Use this when you are working off-site (e.g. attending an event or meeting outside school).</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Go to <strong>Requests</strong> and choose <strong>Outstation</strong>.</li>
+      <li><span class="step-num">2</span>Enter the date, destination, and purpose of your trip.</li>
+      <li><span class="step-num">3</span>Tap <strong>Submit</strong> for admin approval.</li>
+    </ol>`,
+
+        "staff-exception-t": "Submitting an exception request",
+        "staff-exception-b": `<p style="font-size:.9rem;padding-top:.75rem">Use this for any other attendance situation that does not fit the above categories.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Go to <strong>Requests</strong> and choose <strong>Exception</strong>.</li>
+      <li><span class="step-num">2</span>Select the exception type and enter your reason.</li>
+      <li><span class="step-num">3</span>Tap <strong>Submit</strong>.</li>
+    </ol>`,
+
+        "staff-leave-t": "Applying for leave",
+        "staff-leave-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Tap <strong>Leave</strong> in the bottom navigation bar.</li>
+      <li><span class="step-num">2</span>Check your leave balance at the top of the screen.</li>
+      <li><span class="step-num">3</span>Tap the <strong>+</strong> button to open a new leave application.</li>
+      <li><span class="step-num">4</span>Choose the leave type, pick your start and end dates, and enter your reason.</li>
+      <li><span class="step-num">5</span>Optionally attach a supporting document (photo or PDF).</li>
+      <li><span class="step-num">6</span>Tap <strong>Submit</strong>. Your administrator will be notified.</li>
+      <li><span class="step-num">7</span>You will receive a notification when your leave is approved or rejected.</li>
+    </ol>
+    <div class="tip"><strong>Leave types:</strong> CR (annual leave) · CRK (special leave) · CTR (unpaid/unrecorded leave)</div>`,
+
+        "staff-warnings-t": "Viewing warning letters",
+        "staff-warnings-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Tap <strong>Warnings</strong> in the bottom navigation bar.</li>
+      <li><span class="step-num">2</span>Any warning letters issued by your administrator are listed here with the date and reason.</li>
+      <li><span class="step-num">3</span>Tap a warning to view its full details or download the PDF copy.</li>
+    </ol>`,
+
+        "staff-profile-t": "Updating your profile & password",
+        "staff-profile-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Tap <strong>Profile</strong> in the bottom navigation bar.</li>
+      <li><span class="step-num">2</span>Tap <strong>Edit Profile &amp; Password</strong>.</li>
+      <li><span class="step-num">3</span>Update your name, phone, or profile photo as needed.</li>
+      <li><span class="step-num">4</span>To change your password, scroll down to the Password section and enter your current password followed by the new one.</li>
+      <li><span class="step-num">5</span>Tap <strong>Save</strong>.</li>
+    </ol>`,
+
+        "staff-notif-t": "Reading notifications",
+        "staff-notif-b": `<ol class="steps">
+      <li><span class="step-num">1</span>A badge on the Home icon shows your unread notification count.</li>
+      <li><span class="step-num">2</span>Tap <strong>Home</strong>, then the bell icon to open your inbox.</li>
+      <li><span class="step-num">3</span>Tap any notification to read it. Tap <strong>Mark all read</strong> to clear the badge.</li>
+    </ol>`,
+
+        /* ── TEACHER ── */
+        "teacher-title": "Teacher",
+        "teacher-desc": "Your workflow is identical to Staff, with one difference: school holidays that apply specifically to teachers are automatically accounted for in your attendance records.",
+        "teacher-grp": "Everything Staff Can Do",
+        "teacher-card-t": "Full workflow — same as Staff",
+        "teacher-card-b": `<p style="font-size:.9rem;padding-top:.75rem">As a teacher you have access to exactly the same features as a Staff member:</p>
+    <ul style="list-style:disc;padding:.75rem 0 0 1.25rem;font-size:.9rem;display:flex;flex-direction:column;gap:.35rem">
+      <li>First-time setup and login</li>
+      <li>Geofence-based check-in and check-out</li>
+      <li>Attendance history with monthly summary</li>
+      <li>Manual check-in / check-out requests</li>
+      <li>Outstation and exception requests</li>
+      <li>Leave applications (CR, CRK, CTR)</li>
+      <li>View warning letters</li>
+      <li>Edit profile and change password</li>
+      <li>Notifications inbox</li>
+    </ul>
+    <div class="tip"><strong>Teacher holiday note:</strong> When your administrator adds a "teachers only" holiday, those days are automatically excluded from your attendance violations — you do not need to do anything extra.</div>`,
+
+        /* ── ADMIN STAFF ── */
+        "adminstaff-title": "Administrative Staff",
+        "adminstaff-desc": "Your access is the same as a regular Staff member — check in, view history, apply for leave, and manage your profile.",
+        "adminstaff-grp": "Your Features",
+        "adminstaff-card-t": "Full workflow — same as Staff",
+        "adminstaff-card-b": `<p style="font-size:.9rem;padding-top:.75rem">Administrative staff have the same app features as staff members:</p>
+    <ul style="list-style:disc;padding:.75rem 0 0 1.25rem;font-size:.9rem;display:flex;flex-direction:column;gap:.35rem">
+      <li>First-time setup and login</li>
+      <li>Geofence-based check-in and check-out</li>
+      <li>Attendance history with monthly summary</li>
+      <li>Manual check-in / check-out requests</li>
+      <li>Outstation and exception requests</li>
+      <li>Leave applications (CR, CRK, CTR)</li>
+      <li>View warning letters</li>
+      <li>Edit profile and change password</li>
+      <li>Notifications inbox</li>
+    </ul>`,
+
+        /* ── ADMINISTRATOR ── */
+        "admin-title": "Administrator",
+        "admin-desc": "As an administrator you can do everything a staff member can, plus manage your entire team — approve leave, review requests, monitor attendance, issue warnings, and send announcements.",
+        "admin-grp-access": "Getting to the Admin Dashboard",
+        "admin-access-t": "Accessing the admin area",
+        "admin-access-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Log in normally. Your bottom navigation bar includes admin-specific tabs: <strong>Geofence, Staff, Resets, Register,</strong> and <strong>Profile</strong>.</li>
+      <li><span class="step-num">2</span>For the full admin dashboard (leave management, reports, violations, settings), tap <strong>Profile → Admin Dashboard</strong>.</li>
+      <li><span class="step-num">3</span>Inside the dashboard you will see five tabs: <strong>Overview · Leave · Attendance · Staff · Settings</strong>.</li>
+    </ol>`,
+        "admin-grp-monitor": "Monitoring Attendance",
+        "admin-overview-t": "Viewing today's attendance overview",
+        "admin-overview-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Open <strong>Admin Dashboard → Overview</strong> tab.</li>
+      <li><span class="step-num">2</span>The dashboard shows total staff, how many are present, late, or absent today in real time.</li>
+      <li><span class="step-num">3</span>Use the date picker to check any past day.</li>
+      <li><span class="step-num">4</span>The live feed at the bottom shows recent check-in/check-out events.</li>
+    </ol>`,
+        "admin-reports-t": "Generating attendance reports",
+        "admin-reports-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Go to <strong>Admin Dashboard → Attendance</strong> tab.</li>
+      <li><span class="step-num">2</span>Select a month and year.</li>
+      <li><span class="step-num">3</span>Tap the quick report buttons: <strong>Late Arrivals, Absences,</strong> or <strong>Violations</strong> to generate focused reports.</li>
+      <li><span class="step-num">4</span>Use the <strong>Export</strong> button to download as <strong>PDF</strong> or <strong>Excel</strong>.</li>
+    </ol>`,
+        "admin-violations-t": "Handling violations",
+        "admin-violations-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Go to <strong>Admin Dashboard → Attendance → Violations</strong>.</li>
+      <li><span class="step-num">2</span>You will see a list of staff with attendance violations (late arrivals, unexplained absences).</li>
+      <li><span class="step-num">3</span>To follow up, tap a staff member and select <strong>Issue Warning</strong>.</li>
+      <li><span class="step-num">4</span>Fill in the warning type and reason, then confirm. The staff member is notified automatically.</li>
+    </ol>`,
+        "admin-grp-att-req": "Managing Attendance Requests",
+        "admin-att-req-t": "Approving or rejecting attendance requests",
+        "admin-att-req-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Go to <strong>Admin Dashboard → Attendance → Requests</strong>.</li>
+      <li><span class="step-num">2</span>Switch between the <strong>Manual, Outstation,</strong> and <strong>Exceptions</strong> tabs.</li>
+      <li><span class="step-num">3</span>Tap a request to view its full details.</li>
+      <li><span class="step-num">4</span>Tap <strong>Approve</strong> (the attendance record is updated automatically) or <strong>Reject</strong> (enter a reason).</li>
+      <li><span class="step-num">5</span>The staff member receives a push notification with the outcome.</li>
+    </ol>`,
+        "admin-grp-leave": "Managing Leave",
+        "admin-leave-t": "Approving or rejecting leave requests",
+        "admin-leave-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Go to <strong>Admin Dashboard → Leave</strong> tab.</li>
+      <li><span class="step-num">2</span>The <strong>Pending</strong> tab lists all unapproved requests.</li>
+      <li><span class="step-num">3</span>Tap a request to see the staff member's details, requested dates, reason, and any attachments.</li>
+      <li><span class="step-num">4</span>Tap <strong>Approve</strong> or <strong>Reject</strong> (provide a reason if rejecting).</li>
+      <li><span class="step-num">5</span>The <strong>History</strong> tab shows all previously processed requests.</li>
+    </ol>`,
+        "admin-grp-staff": "Managing Staff",
+        "admin-dir-t": "Viewing the staff directory",
+        "admin-dir-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Tap <strong>Staff</strong> in the bottom navigation bar.</li>
+      <li><span class="step-num">2</span>Browse or search by name. Each entry shows whether the staff member is currently on-site.</li>
+      <li><span class="step-num">3</span>Tap any staff member to open their full detail page — attendance history, leave history, warnings, and submitted requests all in one place.</li>
+    </ol>`,
+        "admin-reg-t": "Registering a new staff member",
+        "admin-reg-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Tap <strong>Register</strong> in the bottom navigation bar.</li>
+      <li><span class="step-num">2</span>Fill in the new staff member's details: name, email, phone, file number, position, and role.</li>
+      <li><span class="step-num">3</span>Tap <strong>Register</strong>. A temporary password is generated and shown on the next screen.</li>
+      <li><span class="step-num">4</span>Share the email and temporary password with the new staff member. Ask them to change it on first login.</li>
+    </ol>
+    <div class="note"><strong>Important:</strong> The temporary password is only shown once. Note it down before leaving the success screen.</div>`,
+        "admin-warn-t": "Issuing a warning letter",
+        "admin-warn-b": `<ol class="steps">
+      <li><span class="step-num">1</span>From the <strong>Violations</strong> list or a staff member's detail page, tap <strong>Issue Warning</strong>.</li>
+      <li><span class="step-num">2</span>Select the warning type, enter the reason, and choose whether to notify the staff member.</li>
+      <li><span class="step-num">3</span>Confirm. The warning is recorded and the staff member can view it under their Warnings tab.</li>
+    </ol>`,
+        "admin-holiday-t": "Adding a special holiday",
+        "admin-holiday-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Go to <strong>Admin Dashboard → Settings → Special Holidays</strong>.</li>
+      <li><span class="step-num">2</span>Tap <strong>Add Holiday</strong>.</li>
+      <li><span class="step-num">3</span>Enter the holiday name, date range, and whether it applies to all staff or teachers only.</li>
+      <li><span class="step-num">4</span>Save. Attendance records on those dates will no longer be counted as violations.</li>
+    </ol>`,
+        "admin-announce-t": "Sending an announcement",
+        "admin-announce-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Go to <strong>Admin Dashboard → Settings → Notification Settings</strong>.</li>
+      <li><span class="step-num">2</span>Choose your target audience: <strong>All staff, By role,</strong> or <strong>Individual</strong>.</li>
+      <li><span class="step-num">3</span>Enter a title and message, then tap <strong>Send</strong>.</li>
+      <li><span class="step-num">4</span>Recipients will receive a push notification and see it in their Notifications inbox.</li>
+    </ol>`,
+
+        /* ── PRINCIPAL ── */
+        "principal-title": "Principal",
+        "principal-desc": "Your access is identical to an Administrator. You have full visibility of all staff attendance, can approve leave, issue warnings, register new staff, and configure school settings.",
+        "principal-grp": "Your Capabilities",
+        "principal-card-t": "Full workflow — same as Administrator",
+        "principal-card-b": `<p style="font-size:.9rem;padding-top:.75rem">As principal you have the same capabilities as an administrator:</p>
+    <ul style="list-style:disc;padding:.75rem 0 0 1.25rem;font-size:.9rem;display:flex;flex-direction:column;gap:.35rem">
+      <li>All standard staff features (check-in, leave, warnings)</li>
+      <li>Real-time attendance overview and daily stats</li>
+      <li>Monthly attendance reports (PDF and Excel export)</li>
+      <li>Violations tracking and warning letter issuance</li>
+      <li>Approve or reject leave requests</li>
+      <li>Approve or reject attendance requests</li>
+      <li>Staff directory — view details, attendance, and history</li>
+      <li>Register new staff accounts</li>
+      <li>Manage special holidays and school calendar</li>
+      <li>Send announcements to all staff or targeted groups</li>
+    </ul>
+    <div class="tip"><strong>Note:</strong> System-level settings (geofence boundary, Wi-Fi fingerprints, device audit, password reset approvals) are managed by the System Administrator role.</div>`,
+
+        /* ── SYSTEM ADMIN ── */
+        "sysadmin-title": "System Administrator",
+        "sysadmin-desc": "You manage the technical backbone of the system — the attendance zone, trusted networks, device security, and staff account recovery. You do not have a personal attendance record.",
+        "sysadmin-grp-zone": "Attendance Zone",
+        "sysadmin-geo-t": "Setting up or changing the geofence",
+        "sysadmin-geo-b": `<p style="font-size:.9rem;padding-top:.75rem">The geofence is the virtual boundary staff must be inside to check in. Only you can configure it.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Tap <strong>Geofence</strong> in the bottom navigation bar.</li>
+      <li><span class="step-num">2</span>Use the search bar to find the school by address, or tap on the map to place the centre point manually.</li>
+      <li><span class="step-num">3</span>Drag the <strong>radius slider</strong> to set how large the attendance zone should be (up to 1,000 metres).</li>
+      <li><span class="step-num">4</span>Tap <strong>Save</strong>. The new boundary takes effect immediately for all staff.</li>
+    </ol>
+    <div class="tip"><strong>Tip:</strong> The default radius is 300 m. Use the "current location" button to snap the map to where you are standing.</div>`,
+        "sysadmin-grp-wifi": "Trusted Wi-Fi Networks",
+        "sysadmin-wifi-t": "Adding a trusted Wi-Fi network",
+        "sysadmin-wifi-b": `<p style="font-size:.9rem;padding-top:.75rem">Adding the school's Wi-Fi as a trusted network gives an extra layer of verification that a staff member is physically on-site when they check in.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Connect your phone to the school Wi-Fi network you want to add.</li>
+      <li><span class="step-num">2</span>Go to <strong>Admin Dashboard → Settings → Network Fingerprint</strong>.</li>
+      <li><span class="step-num">3</span>Tap <strong>Scan Current Network</strong>. The app will detect the network name and identifier.</li>
+      <li><span class="step-num">4</span>Tap <strong>Add</strong> to save it to the trusted list.</li>
+    </ol>
+    <div class="tip"><strong>To remove a network:</strong> Tap the network in the list and select Delete.</div>`,
+        "sysadmin-grp-dev": "Device Security",
+        "sysadmin-dev-t": "Reviewing and flagging suspicious devices",
+        "sysadmin-dev-b": `<p style="font-size:.9rem;padding-top:.75rem">The system logs every device that is used to log in. You can audit these logins and flag anything unusual.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Go to <strong>Admin Dashboard → Settings → Device History</strong>.</li>
+      <li><span class="step-num">2</span>Browse logins by staff member — you can see the device model, login time, and location.</li>
+      <li><span class="step-num">3</span>If a login looks suspicious (unfamiliar device, unusual time), tap it and select <strong>Flag Device</strong>.</li>
+      <li><span class="step-num">4</span>Flagged devices are highlighted in the staff member's own Devices page so they are aware.</li>
+    </ol>`,
+        "sysadmin-grp-pw": "Password Recovery",
+        "sysadmin-pw-t": "Approving a staff password reset request",
+        "sysadmin-pw-b": `<p style="font-size:.9rem;padding-top:.75rem">When a staff member cannot reset their own password by email (e.g. they registered with a phone number), they submit a request that only you can approve.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Tap <strong>Resets</strong> in the bottom navigation bar.</li>
+      <li><span class="step-num">2</span>The <strong>Pending</strong> tab lists all outstanding requests.</li>
+      <li><span class="step-num">3</span>Tap a request, verify the staff member's identity offline, then tap <strong>Approve</strong>.</li>
+      <li><span class="step-num">4</span>A reset link is automatically sent to the staff member. They can then set a new password.</li>
+      <li><span class="step-num">5</span>If the request is fraudulent, tap <strong>Reject</strong>.</li>
+    </ol>`,
+        "sysadmin-grp-mgmt": "Staff & School Management",
+        "sysadmin-mgmt-t": "Everything an Administrator can do",
+        "sysadmin-mgmt-b": `<p style="font-size:.9rem;padding-top:.75rem">You also have all standard administrator capabilities:</p>
+    <ul style="list-style:disc;padding:.75rem 0 0 1.25rem;font-size:.9rem;display:flex;flex-direction:column;gap:.35rem">
+      <li>View and manage the full staff directory</li>
+      <li>Register new staff accounts</li>
+      <li>Edit any staff member's profile and set custom work hours</li>
+      <li>View attendance reports and violations</li>
+      <li>Manage special holidays</li>
+      <li>Send announcements to staff</li>
+    </ul>
+    <div class="note"><strong>Note:</strong> You do not have a personal attendance record and cannot check in or out — the system recognises you as a system-level account.</div>`
+      },
+
+      /* ════════════════════════════════════════════
+         BAHASA MELAYU
+      ════════════════════════════════════════════ */
+      ms: {
+        "header-sub": "Panduan penggunaan sistem — langkah demi langkah",
+        "header-tagline": "Pilih peranan anda di bawah untuk melihat panduan",
+        "nav-iam": "Saya adalah:",
+        "role-staff": "Kakitangan",
+        "role-teacher": "Guru",
+        "role-adminstaff": "Kak. Pentadbiran",
+        "role-admin": "Pentadbir",
+        "role-principal": "Pengetua",
+        "role-sysadmin": "Pent. Sistem",
+        "footer": "eHadir@SMKBN · Kehadiran Kakitangan & Pengurusan HR · Panduan Pengguna v1.0",
+
+        "grp-start": "Permulaan",
+        "grp-daily": "Kehadiran Harian",
+        "grp-requests": "Permohonan Kehadiran",
+        "grp-leave": "Cuti",
+        "grp-warn-prof": "Amaran & Profil",
+        "grp-settings": "Tetapan",
+
+        /* ── KAKITANGAN ── */
+        "staff-title": "Kakitangan",
+        "staff-desc": "Sebagai kakitangan, anda boleh daftar masuk dan keluar kerja, memohon cuti, melihat sejarah kehadiran, dan mengurus profil anda — semuanya dari telefon anda.",
+        "staff-setup-t": "Persediaan pertama kali",
+        "staff-setup-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Buka aplikasi. Pada pelancaran pertama, anda akan melihat skrin selamat datang — ketik <strong>Teruskan</strong>.</li>
+      <li><span class="step-num">2</span>Benarkan <strong>akses lokasi</strong> dan <strong>akses pemberitahuan</strong> apabila diminta. Kedua-duanya diperlukan untuk penjejakan kehadiran.</li>
+      <li><span class="step-num">3</span>Pada skrin log masuk, masukkan e-mel dan kata laluan sementara yang diberikan oleh pentadbir anda, kemudian ketik <strong>Log Masuk</strong>.</li>
+      <li><span class="step-num">4</span>Pergi ke <strong>Profil → Edit Profil</strong> dan tukar kata laluan anda kepada sesuatu yang peribadi.</li>
+    </ol>
+    <div class="tip"><strong>Petua:</strong> Aktifkan "Ingat Saya" pada skrin log masuk supaya anda hanya perlu log masuk sekali sahaja.</div>`,
+
+        "staff-login-t": "Log masuk",
+        "staff-login-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Buka aplikasi dan masukkan e-mel (atau nombor telefon) serta kata laluan anda.</li>
+      <li><span class="step-num">2</span>Ketik <strong>Log Masuk</strong>. Anda akan dibawa ke skrin Utama.</li>
+    </ol>
+    <div class="tip"><strong>Terlupa kata laluan?</strong> Ketik "Terlupa kata laluan?" pada skrin log masuk, masukkan e-mel atau nombor telefon anda, dan ikuti arahan yang dihantar kepada anda.</div>`,
+
+        "staff-checkin-t": "Daftar masuk apabila tiba",
+        "staff-checkin-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Apabila anda tiba di premis sekolah, buka aplikasi.</li>
+      <li><span class="step-num">2</span>Sebuah <strong>tetingkap Daftar Masuk</strong> akan muncul secara automatik apabila telefon anda mengesan bahawa anda berada dalam kawasan sekolah.</li>
+      <li><span class="step-num">3</span>Ketik <strong>Daftar Masuk</strong> untuk merekodkan ketibaan anda. Pemberitahuan pengesahan akan muncul.</li>
+    </ol>
+    <div class="tip"><strong>Petua:</strong> Pastikan GPS telefon anda dihidupkan sebelum tiba supaya tetingkap boleh muncul.</div>
+    <div class="note"><strong>Lewat?</strong> Jika anda tiba selepas waktu mula yang dijadualkan, rekod anda akan ditandakan sebagai ketibaan lewat.</div>`,
+
+        "staff-checkout-t": "Daftar keluar apabila pergi",
+        "staff-checkout-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Sebelum meninggalkan premis, buka aplikasi.</li>
+      <li><span class="step-num">2</span>Aplikasi akan menggesa anda untuk daftar keluar, atau anda boleh ketik <strong>Daftar Keluar</strong> pada skrin Utama.</li>
+      <li><span class="step-num">3</span>Masa pemergian anda direkodkan.</li>
+    </ol>
+    <div class="tip"><strong>Petua:</strong> Jika anda terlupa daftar keluar, anda boleh hantar <strong>Permohonan Daftar Keluar Manual</strong> (lihat di bawah).</div>`,
+
+        "staff-history-t": "Lihat sejarah kehadiran",
+        "staff-history-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Ketik <strong>Sejarah</strong> pada bar navigasi bawah.</li>
+      <li><span class="step-num">2</span>Gunakan pemilih bulan/tahun untuk menyemak bulan-bulan lepas.</li>
+      <li><span class="step-num">3</span>Entri hijau adalah lengkap (daftar masuk dan keluar). Entri yang diserlahkan adalah tidak lengkap atau ditandakan.</li>
+      <li><span class="step-num">4</span>Ringkasan di bahagian atas menunjukkan jumlah hari hadir, ketibaan lewat, dan ketidakhadiran untuk bulan tersebut.</li>
+    </ol>`,
+
+        "staff-manual-t": "Hantar permohonan daftar masuk/keluar manual",
+        "staff-manual-b": `<p style="font-size:.9rem;padding-top:.75rem">Gunakan ini jika anda terlupa daftar masuk atau keluar pada hari yang lalu.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Dari skrin Utama, ketik pintasan <strong>Permohonan</strong>, atau pergi ke <strong>Sejarah</strong> dan ketik butang permohonan.</li>
+      <li><span class="step-num">2</span>Pilih <strong>Daftar Masuk Manual</strong> atau <strong>Daftar Keluar Manual</strong>.</li>
+      <li><span class="step-num">3</span>Pilih tarikh dan masa sebenar anda tiba atau pergi.</li>
+      <li><span class="step-num">4</span>Ketik <strong>Hantar</strong>. Permohonan anda dihantar kepada pentadbir untuk kelulusan.</li>
+      <li><span class="step-num">5</span>Anda akan menerima pemberitahuan setelah permohonan diluluskan atau ditolak.</li>
+    </ol>`,
+
+        "staff-outstation-t": "Hantar permohonan outstation",
+        "staff-outstation-b": `<p style="font-size:.9rem;padding-top:.75rem">Gunakan ini apabila anda bekerja di luar pejabat (cth. menghadiri acara atau mesyuarat di luar sekolah).</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Pergi ke <strong>Permohonan</strong> dan pilih <strong>Outstation</strong>.</li>
+      <li><span class="step-num">2</span>Masukkan tarikh, destinasi, dan tujuan perjalanan anda.</li>
+      <li><span class="step-num">3</span>Ketik <strong>Hantar</strong> untuk kelulusan pentadbir.</li>
+    </ol>`,
+
+        "staff-exception-t": "Hantar permohonan pengecualian",
+        "staff-exception-b": `<p style="font-size:.9rem;padding-top:.75rem">Gunakan ini untuk sebarang situasi kehadiran lain yang tidak termasuk dalam kategori di atas.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Pergi ke <strong>Permohonan</strong> dan pilih <strong>Pengecualian</strong>.</li>
+      <li><span class="step-num">2</span>Pilih jenis pengecualian dan masukkan sebab anda.</li>
+      <li><span class="step-num">3</span>Ketik <strong>Hantar</strong>.</li>
+    </ol>`,
+
+        "staff-leave-t": "Memohon cuti",
+        "staff-leave-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Ketik <strong>Cuti</strong> pada bar navigasi bawah.</li>
+      <li><span class="step-num">2</span>Semak baki cuti anda di bahagian atas skrin.</li>
+      <li><span class="step-num">3</span>Ketik butang <strong>+</strong> untuk membuka permohonan cuti baharu.</li>
+      <li><span class="step-num">4</span>Pilih jenis cuti, pilih tarikh mula dan tamat, dan masukkan sebab anda.</li>
+      <li><span class="step-num">5</span>Lampirkan dokumen sokongan secara pilihan (foto atau PDF).</li>
+      <li><span class="step-num">6</span>Ketik <strong>Hantar</strong>. Pentadbir anda akan dimaklumkan.</li>
+      <li><span class="step-num">7</span>Anda akan menerima pemberitahuan apabila cuti anda diluluskan atau ditolak.</li>
+    </ol>
+    <div class="tip"><strong>Jenis cuti:</strong> CR (cuti rehat tahunan) · CRK (cuti rehat khas) · CTR (cuti tanpa rekod)</div>`,
+
+        "staff-warnings-t": "Lihat surat amaran",
+        "staff-warnings-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Ketik <strong>Amaran</strong> pada bar navigasi bawah.</li>
+      <li><span class="step-num">2</span>Sebarang surat amaran yang dikeluarkan oleh pentadbir anda disenaraikan di sini beserta tarikh dan sebab.</li>
+      <li><span class="step-num">3</span>Ketik sesebuah amaran untuk melihat butiran penuh atau muat turun salinan PDF.</li>
+    </ol>`,
+
+        "staff-profile-t": "Kemaskini profil &amp; kata laluan",
+        "staff-profile-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Ketik <strong>Profil</strong> pada bar navigasi bawah.</li>
+      <li><span class="step-num">2</span>Ketik <strong>Edit Profil &amp; Kata Laluan</strong>.</li>
+      <li><span class="step-num">3</span>Kemaskini nama, nombor telefon, atau foto profil anda mengikut keperluan.</li>
+      <li><span class="step-num">4</span>Untuk menukar kata laluan, tatal ke bahagian Kata Laluan dan masukkan kata laluan semasa diikuti dengan yang baharu.</li>
+      <li><span class="step-num">5</span>Ketik <strong>Simpan</strong>.</li>
+    </ol>`,
+
+        "staff-notif-t": "Baca pemberitahuan",
+        "staff-notif-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Lencana pada ikon Utama menunjukkan bilangan pemberitahuan yang belum dibaca.</li>
+      <li><span class="step-num">2</span>Ketik <strong>Utama</strong>, kemudian ikon loceng untuk membuka peti masuk anda.</li>
+      <li><span class="step-num">3</span>Ketik mana-mana pemberitahuan untuk membacanya. Ketik <strong>Tandakan semua dibaca</strong> untuk mengosongkan lencana.</li>
+    </ol>`,
+
+        /* ── GURU ── */
+        "teacher-title": "Guru",
+        "teacher-desc": "Aliran kerja anda adalah sama dengan Kakitangan, dengan satu perbezaan: cuti sekolah yang khusus untuk guru diambil kira secara automatik dalam rekod kehadiran anda.",
+        "teacher-grp": "Semua Yang Boleh Dilakukan Kakitangan",
+        "teacher-card-t": "Aliran kerja penuh — sama seperti Kakitangan",
+        "teacher-card-b": `<p style="font-size:.9rem;padding-top:.75rem">Sebagai guru, anda mempunyai akses kepada ciri-ciri yang sama seperti Kakitangan:</p>
+    <ul style="list-style:disc;padding:.75rem 0 0 1.25rem;font-size:.9rem;display:flex;flex-direction:column;gap:.35rem">
+      <li>Persediaan pertama kali dan log masuk</li>
+      <li>Daftar masuk dan keluar berasaskan geofence</li>
+      <li>Sejarah kehadiran dengan ringkasan bulanan</li>
+      <li>Permohonan daftar masuk / keluar manual</li>
+      <li>Permohonan outstation dan pengecualian</li>
+      <li>Permohonan cuti (CR, CRK, CTR)</li>
+      <li>Lihat surat amaran</li>
+      <li>Edit profil dan tukar kata laluan</li>
+      <li>Peti masuk pemberitahuan</li>
+    </ul>
+    <div class="tip"><strong>Nota cuti guru:</strong> Apabila pentadbir anda menambah cuti "guru sahaja", hari-hari tersebut secara automatik dikecualikan daripada pelanggaran kehadiran anda — anda tidak perlu melakukan apa-apa tambahan.</div>`,
+
+        /* ── KAKI. PENTADBIRAN ── */
+        "adminstaff-title": "Kakitangan Pentadbiran",
+        "adminstaff-desc": "Akses anda adalah sama seperti Kakitangan biasa — daftar masuk, lihat sejarah, mohon cuti, dan urus profil anda.",
+        "adminstaff-grp": "Ciri-Ciri Anda",
+        "adminstaff-card-t": "Aliran kerja penuh — sama seperti Kakitangan",
+        "adminstaff-card-b": `<p style="font-size:.9rem;padding-top:.75rem">Kakitangan pentadbiran mempunyai ciri-ciri aplikasi yang sama seperti kakitangan biasa:</p>
+    <ul style="list-style:disc;padding:.75rem 0 0 1.25rem;font-size:.9rem;display:flex;flex-direction:column;gap:.35rem">
+      <li>Persediaan pertama kali dan log masuk</li>
+      <li>Daftar masuk dan keluar berasaskan geofence</li>
+      <li>Sejarah kehadiran dengan ringkasan bulanan</li>
+      <li>Permohonan daftar masuk / keluar manual</li>
+      <li>Permohonan outstation dan pengecualian</li>
+      <li>Permohonan cuti (CR, CRK, CTR)</li>
+      <li>Lihat surat amaran</li>
+      <li>Edit profil dan tukar kata laluan</li>
+      <li>Peti masuk pemberitahuan</li>
+    </ul>`,
+
+        /* ── PENTADBIR ── */
+        "admin-title": "Pentadbir",
+        "admin-desc": "Sebagai pentadbir, anda boleh melakukan semua yang boleh dilakukan kakitangan, ditambah mengurus pasukan anda — meluluskan cuti, menyemak permohonan, memantau kehadiran, mengeluarkan amaran, dan menghantar pengumuman.",
+        "admin-grp-access": "Akses Papan Pemuka Pentadbir",
+        "admin-access-t": "Akses kawasan pentadbir",
+        "admin-access-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Log masuk seperti biasa. Bar navigasi bawah anda termasuk tab khusus pentadbir: <strong>Geofence, Kakitangan, Tetapan Semula, Daftar,</strong> dan <strong>Profil</strong>.</li>
+      <li><span class="step-num">2</span>Untuk papan pemuka pentadbir penuh, ketik <strong>Profil → Papan Pemuka Pentadbir</strong>.</li>
+      <li><span class="step-num">3</span>Di dalam papan pemuka, anda akan melihat lima tab: <strong>Gambaran Keseluruhan · Cuti · Kehadiran · Kakitangan · Tetapan</strong>.</li>
+    </ol>`,
+        "admin-grp-monitor": "Pemantauan Kehadiran",
+        "admin-overview-t": "Lihat gambaran kehadiran hari ini",
+        "admin-overview-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Buka tab <strong>Papan Pemuka Pentadbir → Gambaran Keseluruhan</strong>.</li>
+      <li><span class="step-num">2</span>Papan pemuka menunjukkan jumlah kakitangan, berapa ramai yang hadir, lewat, atau tidak hadir hari ini secara masa nyata.</li>
+      <li><span class="step-num">3</span>Gunakan pemilih tarikh untuk menyemak mana-mana hari yang lalu.</li>
+      <li><span class="step-num">4</span>Suapan langsung di bahagian bawah menunjukkan acara daftar masuk/keluar terkini.</li>
+    </ol>`,
+        "admin-reports-t": "Jana laporan kehadiran",
+        "admin-reports-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Pergi ke tab <strong>Papan Pemuka Pentadbir → Kehadiran</strong>.</li>
+      <li><span class="step-num">2</span>Pilih bulan dan tahun.</li>
+      <li><span class="step-num">3</span>Ketik butang laporan pantas: <strong>Ketibaan Lewat, Ketidakhadiran,</strong> atau <strong>Pelanggaran</strong>.</li>
+      <li><span class="step-num">4</span>Gunakan butang <strong>Eksport</strong> untuk muat turun sebagai <strong>PDF</strong> atau <strong>Excel</strong>.</li>
+    </ol>`,
+        "admin-violations-t": "Menangani pelanggaran",
+        "admin-violations-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Pergi ke <strong>Papan Pemuka Pentadbir → Kehadiran → Pelanggaran</strong>.</li>
+      <li><span class="step-num">2</span>Anda akan melihat senarai kakitangan dengan pelanggaran kehadiran (ketibaan lewat, ketidakhadiran tanpa penjelasan).</li>
+      <li><span class="step-num">3</span>Untuk tindak lanjut, ketik ahli kakitangan dan pilih <strong>Keluarkan Amaran</strong>.</li>
+      <li><span class="step-num">4</span>Isi jenis amaran dan sebab, kemudian sahkan. Ahli kakitangan akan dimaklumkan secara automatik.</li>
+    </ol>`,
+        "admin-grp-att-req": "Urus Permohonan Kehadiran",
+        "admin-att-req-t": "Luluskan atau tolak permohonan kehadiran",
+        "admin-att-req-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Pergi ke <strong>Papan Pemuka Pentadbir → Kehadiran → Permohonan</strong>.</li>
+      <li><span class="step-num">2</span>Tukar antara tab <strong>Manual, Outstation,</strong> dan <strong>Pengecualian</strong>.</li>
+      <li><span class="step-num">3</span>Ketik sesuatu permohonan untuk melihat butiran penuhnya.</li>
+      <li><span class="step-num">4</span>Ketik <strong>Lulus</strong> (rekod dikemaskini secara automatik) atau <strong>Tolak</strong> (masukkan sebab).</li>
+      <li><span class="step-num">5</span>Ahli kakitangan menerima pemberitahuan dengan hasilnya.</li>
+    </ol>`,
+        "admin-grp-leave": "Urus Cuti",
+        "admin-leave-t": "Luluskan atau tolak permohonan cuti",
+        "admin-leave-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Pergi ke tab <strong>Papan Pemuka Pentadbir → Cuti</strong>.</li>
+      <li><span class="step-num">2</span>Tab <strong>Belum Selesai</strong> menyenaraikan semua permohonan yang belum diluluskan.</li>
+      <li><span class="step-num">3</span>Ketik permohonan untuk melihat butiran, tarikh yang dimohon, sebab, dan lampiran.</li>
+      <li><span class="step-num">4</span>Ketik <strong>Lulus</strong> atau <strong>Tolak</strong> (berikan sebab jika ditolak).</li>
+      <li><span class="step-num">5</span>Tab <strong>Sejarah</strong> menunjukkan semua permohonan yang telah diproses.</li>
+    </ol>`,
+        "admin-grp-staff": "Urus Kakitangan",
+        "admin-dir-t": "Lihat direktori kakitangan",
+        "admin-dir-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Ketik <strong>Kakitangan</strong> pada bar navigasi bawah.</li>
+      <li><span class="step-num">2</span>Semak imbas atau cari mengikut nama. Setiap entri menunjukkan sama ada ahli kakitangan sedang berada di tapak.</li>
+      <li><span class="step-num">3</span>Ketik mana-mana ahli kakitangan untuk membuka halaman butiran penuh mereka.</li>
+    </ol>`,
+        "admin-reg-t": "Daftarkan ahli kakitangan baharu",
+        "admin-reg-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Ketik <strong>Daftar</strong> pada bar navigasi bawah.</li>
+      <li><span class="step-num">2</span>Isi butiran ahli kakitangan baharu: nama, e-mel, telefon, nombor fail, jawatan, dan peranan.</li>
+      <li><span class="step-num">3</span>Ketik <strong>Daftar</strong>. Kata laluan sementara dijana dan ditunjukkan pada skrin seterusnya.</li>
+      <li><span class="step-num">4</span>Kongsi e-mel dan kata laluan sementara dengan ahli kakitangan baharu. Minta mereka menukarnya semasa log masuk pertama.</li>
+    </ol>
+    <div class="note"><strong>Penting:</strong> Kata laluan sementara hanya ditunjukkan sekali. Catat sebelum meninggalkan skrin kejayaan.</div>`,
+        "admin-warn-t": "Keluarkan surat amaran",
+        "admin-warn-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Dari senarai <strong>Pelanggaran</strong> atau halaman butiran ahli kakitangan, ketik <strong>Keluarkan Amaran</strong>.</li>
+      <li><span class="step-num">2</span>Pilih jenis amaran, masukkan sebab, dan pilih sama ada untuk memaklumkan ahli kakitangan.</li>
+      <li><span class="step-num">3</span>Sahkan. Amaran direkodkan dan ahli kakitangan boleh melihatnya di bawah tab Amaran mereka.</li>
+    </ol>`,
+        "admin-holiday-t": "Tambah cuti khas",
+        "admin-holiday-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Pergi ke <strong>Papan Pemuka Pentadbir → Tetapan → Cuti Khas</strong>.</li>
+      <li><span class="step-num">2</span>Ketik <strong>Tambah Cuti</strong>.</li>
+      <li><span class="step-num">3</span>Masukkan nama cuti, julat tarikh, dan sama ada ia terpakai kepada semua kakitangan atau guru sahaja.</li>
+      <li><span class="step-num">4</span>Simpan. Rekod kehadiran pada tarikh tersebut tidak akan lagi dikira sebagai pelanggaran.</li>
+    </ol>`,
+        "admin-announce-t": "Hantar pengumuman",
+        "admin-announce-b": `<ol class="steps">
+      <li><span class="step-num">1</span>Pergi ke <strong>Papan Pemuka Pentadbir → Tetapan → Tetapan Pemberitahuan</strong>.</li>
+      <li><span class="step-num">2</span>Pilih sasaran anda: <strong>Semua kakitangan, Mengikut peranan,</strong> atau <strong>Individu</strong>.</li>
+      <li><span class="step-num">3</span>Masukkan tajuk dan mesej, kemudian ketik <strong>Hantar</strong>.</li>
+      <li><span class="step-num">4</span>Penerima akan menerima pemberitahuan dan melihatnya dalam peti masuk Pemberitahuan mereka.</li>
+    </ol>`,
+
+        /* ── PENGETUA ── */
+        "principal-title": "Pengetua",
+        "principal-desc": "Akses anda adalah sama seperti Pentadbir. Anda mempunyai keterlihatan penuh ke atas semua kehadiran kakitangan, boleh meluluskan cuti, mengeluarkan amaran, mendaftarkan kakitangan baharu, dan mengkonfigurasi tetapan sekolah.",
+        "principal-grp": "Keupayaan Anda",
+        "principal-card-t": "Aliran kerja penuh — sama seperti Pentadbir",
+        "principal-card-b": `<p style="font-size:.9rem;padding-top:.75rem">Sebagai pengetua, anda mempunyai keupayaan yang sama seperti pentadbir:</p>
+    <ul style="list-style:disc;padding:.75rem 0 0 1.25rem;font-size:.9rem;display:flex;flex-direction:column;gap:.35rem">
+      <li>Semua ciri kakitangan standard (daftar masuk, cuti, amaran)</li>
+      <li>Gambaran kehadiran masa nyata dan statistik harian</li>
+      <li>Laporan kehadiran bulanan (eksport PDF dan Excel)</li>
+      <li>Penjejakan pelanggaran dan pengeluaran surat amaran</li>
+      <li>Luluskan atau tolak permohonan cuti</li>
+      <li>Luluskan atau tolak permohonan kehadiran</li>
+      <li>Direktori kakitangan — lihat butiran, kehadiran, dan sejarah</li>
+      <li>Daftarkan akaun kakitangan baharu</li>
+      <li>Urus cuti khas dan kalendar sekolah</li>
+      <li>Hantar pengumuman kepada semua kakitangan atau kumpulan sasaran</li>
+    </ul>
+    <div class="tip"><strong>Nota:</strong> Tetapan peringkat sistem (sempadan geofence, cap jari Wi-Fi, audit peranti, kelulusan tetapan semula kata laluan) diuruskan oleh peranan Pentadbir Sistem.</div>`,
+
+        /* ── PENTADBIR SISTEM ── */
+        "sysadmin-title": "Pentadbir Sistem",
+        "sysadmin-desc": "Anda mengurus tulang belakang teknikal sistem — zon kehadiran, rangkaian yang dipercayai, keselamatan peranti, dan pemulihan akaun kakitangan. Anda tidak mempunyai rekod kehadiran peribadi.",
+        "sysadmin-grp-zone": "Zon Kehadiran",
+        "sysadmin-geo-t": "Sediakan atau ubah geofence",
+        "sysadmin-geo-b": `<p style="font-size:.9rem;padding-top:.75rem">Geofence adalah sempadan maya di mana kakitangan mesti berada untuk daftar masuk. Hanya anda yang boleh mengkonfigurasinya.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Ketik <strong>Geofence</strong> pada bar navigasi bawah.</li>
+      <li><span class="step-num">2</span>Gunakan bar carian untuk mencari sekolah mengikut alamat, atau ketik pada peta untuk meletakkan titik tengah secara manual.</li>
+      <li><span class="step-num">3</span>Seret <strong>gelongsor jejari</strong> untuk menetapkan saiz zon kehadiran (sehingga 1,000 meter).</li>
+      <li><span class="step-num">4</span>Ketik <strong>Simpan</strong>. Sempadan baharu berkuat kuasa serta-merta untuk semua kakitangan.</li>
+    </ol>
+    <div class="tip"><strong>Petua:</strong> Jejari lalai ialah 300 m. Gunakan butang "lokasi semasa" untuk menyelaraskan peta ke tempat anda berdiri.</div>`,
+        "sysadmin-grp-wifi": "Rangkaian Wi-Fi Dipercayai",
+        "sysadmin-wifi-t": "Tambah rangkaian Wi-Fi dipercayai",
+        "sysadmin-wifi-b": `<p style="font-size:.9rem;padding-top:.75rem">Menambah Wi-Fi sekolah sebagai rangkaian dipercayai memberikan lapisan pengesahan tambahan bahawa ahli kakitangan benar-benar berada di tapak apabila mendaftar masuk.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Sambungkan telefon anda ke rangkaian Wi-Fi sekolah yang ingin anda tambah.</li>
+      <li><span class="step-num">2</span>Pergi ke <strong>Papan Pemuka Pentadbir → Tetapan → Cap Jari Rangkaian</strong>.</li>
+      <li><span class="step-num">3</span>Ketik <strong>Imbas Rangkaian Semasa</strong>. Aplikasi akan mengesan nama dan pengecam rangkaian.</li>
+      <li><span class="step-num">4</span>Ketik <strong>Tambah</strong> untuk menyimpannya ke senarai dipercayai.</li>
+    </ol>
+    <div class="tip"><strong>Untuk membuang rangkaian:</strong> Ketik rangkaian dalam senarai dan pilih Padam.</div>`,
+        "sysadmin-grp-dev": "Keselamatan Peranti",
+        "sysadmin-dev-t": "Semak dan tandakan peranti yang mencurigakan",
+        "sysadmin-dev-b": `<p style="font-size:.9rem;padding-top:.75rem">Sistem merekodkan setiap peranti yang digunakan untuk log masuk. Anda boleh mengaudit log masuk ini dan menandakan sebarang perkara yang luar biasa.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Pergi ke <strong>Papan Pemuka Pentadbir → Tetapan → Sejarah Peranti</strong>.</li>
+      <li><span class="step-num">2</span>Semak imbas log masuk mengikut ahli kakitangan — anda boleh melihat model peranti, masa log masuk, dan lokasi.</li>
+      <li><span class="step-num">3</span>Jika sesuatu log masuk kelihatan mencurigakan, ketik dan pilih <strong>Tandakan Peranti</strong>.</li>
+      <li><span class="step-num">4</span>Peranti yang ditandakan diserlahkan di halaman Peranti ahli kakitangan agar mereka sedar.</li>
+    </ol>`,
+        "sysadmin-grp-pw": "Pemulihan Kata Laluan",
+        "sysadmin-pw-t": "Luluskan permohonan tetapan semula kata laluan",
+        "sysadmin-pw-b": `<p style="font-size:.9rem;padding-top:.75rem">Apabila ahli kakitangan tidak dapat menetapkan semula kata laluan mereka melalui e-mel, mereka menghantar permohonan yang hanya anda boleh luluskan.</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span>Ketik <strong>Tetapan Semula</strong> pada bar navigasi bawah.</li>
+      <li><span class="step-num">2</span>Tab <strong>Belum Selesai</strong> menyenaraikan semua permohonan yang belum diselesaikan.</li>
+      <li><span class="step-num">3</span>Ketik sesuatu permohonan, sahkan identiti ahli kakitangan secara luar talian, kemudian ketik <strong>Lulus</strong>.</li>
+      <li><span class="step-num">4</span>Pautan tetapan semula dihantar secara automatik kepada ahli kakitangan. Mereka kemudian boleh menetapkan kata laluan baharu.</li>
+      <li><span class="step-num">5</span>Jika permohonan adalah penipuan, ketik <strong>Tolak</strong>.</li>
+    </ol>`,
+        "sysadmin-grp-mgmt": "Pengurusan Kakitangan &amp; Sekolah",
+        "sysadmin-mgmt-t": "Semua yang boleh dilakukan oleh Pentadbir",
+        "sysadmin-mgmt-b": `<p style="font-size:.9rem;padding-top:.75rem">Anda juga mempunyai semua keupayaan pentadbir standard:</p>
+    <ul style="list-style:disc;padding:.75rem 0 0 1.25rem;font-size:.9rem;display:flex;flex-direction:column;gap:.35rem">
+      <li>Lihat dan urus direktori kakitangan penuh</li>
+      <li>Daftarkan akaun kakitangan baharu</li>
+      <li>Edit profil mana-mana ahli kakitangan dan tetapkan waktu kerja tersuai</li>
+      <li>Lihat laporan kehadiran dan pelanggaran</li>
+      <li>Urus cuti khas</li>
+      <li>Hantar pengumuman kepada kakitangan</li>
+    </ul>
+    <div class="note"><strong>Nota:</strong> Anda tidak mempunyai rekod kehadiran peribadi dan tidak boleh daftar masuk atau keluar — sistem mengenali anda sebagai akaun peringkat sistem.</div>`
+      }
+    };
+
+    let lang = localStorage.getItem('ug-lang') || 'en';
+
+    function applyLang(l) {
+      lang = l;
+      localStorage.setItem('ug-lang', l);
+      document.documentElement.lang = l;
+
+      // text nodes
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (T[l][key] !== undefined) el.textContent = T[l][key];
+      });
+      // html nodes
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.dataset.i18nHtml;
+        if (T[l][key] !== undefined) el.innerHTML = T[l][key];
+      });
+
+      // toggle UI
+      const track = document.getElementById('lang-toggle');
+      const lblEn = document.getElementById('lbl-en');
+      const lblMs = document.getElementById('lbl-ms');
+      if (l === 'ms') {
+        track.classList.add('on');
+        lblEn.classList.remove('active-lang');
+        lblMs.classList.add('active-lang');
+      } else {
+        track.classList.remove('on');
+        lblEn.classList.add('active-lang');
+        lblMs.classList.remove('active-lang');
+      }
+    }
+
+    // Language toggle
+    document.getElementById('lang-toggle').addEventListener('click', () => {
+      applyLang(lang === 'en' ? 'ms' : 'en');
+    });
+
+    // Role switching
+    document.querySelectorAll('.role-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.role-section').forEach(s => {
+          s.classList.toggle('visible', s.dataset.role === btn.dataset.role);
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Accordion
+    document.querySelectorAll('.flow-card-top').forEach(top => {
+      top.addEventListener('click', () => top.closest('.flow-card').classList.toggle('open'));
+    });
+
+    // Init
+    applyLang(lang);
+  </script>
+</body>
+
+</html>

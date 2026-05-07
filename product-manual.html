@@ -1,0 +1,2336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eHadir@SMKBN — Product Manual</title>
+  <style>
+    :root {
+      --brand: #1565C0;
+      --brand-light: #E3F2FD;
+      --brand-dark: #0D47A1;
+      --accent: #0288D1;
+      --success: #2E7D32;
+      --warn: #E65100;
+      --danger: #C62828;
+      --text: #212121;
+      --muted: #616161;
+      --border: #E0E0E0;
+      --bg: #FAFAFA;
+      --white: #FFFFFF;
+      --code-bg: #F5F5F5;
+      --radius: 6px;
+      --shadow: 0 1px 4px rgba(0, 0, 0, .10);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    a {
+      color: var(--brand);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── LAYOUT ─────────────────────────────────────────── */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ─────────────────────────────────────────── */
+    #sidebar {
+      width: 270px;
+      min-width: 270px;
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 0 0 2rem;
+      z-index: 10;
+    }
+
+    .sidebar-header {
+      background: var(--brand);
+      color: var(--white);
+      padding: 1.1rem 1.25rem;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .3px;
+      position: sticky;
+      top: 0;
+    }
+
+    .sidebar-header small {
+      display: block;
+      font-size: .72rem;
+      font-weight: 400;
+      opacity: .8;
+      margin-top: 2px;
+    }
+
+    #toc {
+      padding: .5rem 0;
+    }
+
+    #toc a {
+      display: block;
+      padding: .38rem 1.25rem;
+      font-size: .82rem;
+      color: var(--text);
+      border-left: 3px solid transparent;
+      transition: background .15s, border-color .15s;
+    }
+
+    #toc a:hover,
+    #toc a.active {
+      background: var(--brand-light);
+      border-left-color: var(--brand);
+      color: var(--brand-dark);
+      text-decoration: none;
+    }
+
+    .toc-section {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--muted);
+      padding: .9rem 1.25rem .3rem;
+    }
+
+    /* ── MAIN CONTENT ────────────────────────────────────── */
+    main {
+      flex: 1;
+      max-width: 960px;
+      padding: 2.5rem 2.5rem 4rem;
+    }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--brand-dark), var(--accent));
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+    }
+
+    .hero p {
+      opacity: .85;
+      margin-top: .4rem;
+      font-size: .95rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: .8rem;
+      opacity: .75;
+    }
+
+    /* ── SECTIONS ────────────────────────────────────────── */
+    section {
+      margin-bottom: 3.5rem;
+    }
+
+    section>h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+      border-bottom: 2px solid var(--brand-light);
+      padding-bottom: .5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    section>h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--brand);
+      margin: 1.75rem 0 .6rem;
+    }
+
+    /* ── FEATURE CARDS ──────────────────────────────────── */
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .feature-card-header {
+      background: var(--brand-light);
+      padding: .75rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feature-card-header h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+      flex: 1;
+    }
+
+    .feature-body {
+      padding: .9rem 1.1rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .7rem 1.5rem;
+      font-size: .85rem;
+    }
+
+    @media(max-width: 700px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field-label {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: var(--muted);
+      margin-bottom: .2rem;
+    }
+
+    .field-value {
+      color: var(--text);
+    }
+
+    /* ── ROLE BADGES ─────────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      padding: .18rem .55rem;
+      border-radius: 99px;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .3px;
+      white-space: nowrap;
+    }
+
+    .badge-staff {
+      background: #E8F5E9;
+      color: #2E7D32;
+    }
+
+    .badge-admin {
+      background: #FFF3E0;
+      color: #E65100;
+    }
+
+    .badge-sysadmin {
+      background: #FCE4EC;
+      color: #C62828;
+    }
+
+    .badge-all {
+      background: #E3F2FD;
+      color: #1565C0;
+    }
+
+    .badge-note {
+      background: #FFF8E1;
+      color: #795548;
+    }
+
+    .badge-wip {
+      background: #F3E5F5;
+      color: #6A1B9A;
+    }
+
+    /* ── CODE / PATH ─────────────────────────────────────── */
+    code {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: .1rem .35rem;
+      font-size: .8rem;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      color: #C62828;
+    }
+
+    .path-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .path-list li {
+      padding: .2rem 0;
+      font-size: .82rem;
+      color: var(--muted);
+    }
+
+    .path-list li::before {
+      content: "📄 ";
+    }
+
+    /* ── ROLE MATRIX TABLE ───────────────────────────────── */
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82rem;
+      margin-top: .75rem;
+    }
+
+    .matrix-table th {
+      background: var(--brand);
+      color: var(--white);
+      padding: .5rem .7rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .matrix-table td {
+      padding: .45rem .7rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .matrix-table tr:nth-child(even) td {
+      background: #FAFAFA;
+    }
+
+    .matrix-table tr:hover td {
+      background: var(--brand-light);
+    }
+
+    .check {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .cross {
+      color: var(--danger);
+    }
+
+    /* ── INFO BOXES ─────────────────────────────────────── */
+    .info-box {
+      border-left: 4px solid var(--brand);
+      background: var(--brand-light);
+      padding: .7rem 1rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: .85rem;
+      margin: .75rem 0;
+    }
+
+    .warn-box {
+      border-left: 4px solid var(--warn);
+      background: #FFF3E0;
+      padding: .7rem 1rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: .85rem;
+      margin: .75rem 0;
+    }
+
+    /* ── FULL-WIDTH DIVIDER ──────────────────────────────── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    /* ── RESPONSIVE SIDEBAR ─────────────────────────────── */
+    @media(max-width: 860px) {
+      #sidebar {
+        display: none;
+      }
+
+      main {
+        padding: 1.5rem 1rem 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- ═══════════════════════════════════════════════════════
+       SIDEBAR / TABLE OF CONTENTS
+  ═══════════════════════════════════════════════════════ -->
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        eHadir@SMKBN
+        <small>Product Manual · v1.0</small>
+      </div>
+      <nav id="toc">
+        <div class="toc-section">Overview</div>
+        <a href="#intro">Introduction</a>
+        <a href="#roles">Roles &amp; Permissions</a>
+        <a href="#role-matrix">Role Access Matrix</a>
+
+        <div class="toc-section">Authentication</div>
+        <a href="#login">Login</a>
+        <a href="#register">Self-Registration</a>
+        <a href="#forgot-password">Forgot Password</a>
+        <a href="#reset-password">Reset Password</a>
+        <a href="#onboarding">Onboarding</a>
+
+        <div class="toc-section">Navigation</div>
+        <a href="#main-nav">Main Navigation</a>
+        <a href="#dashboard">Dashboard (Home)</a>
+
+        <div class="toc-section">Attendance</div>
+        <a href="#checkin-popup">Geofence Check-In</a>
+        <a href="#attendance-history">Attendance History</a>
+        <a href="#attendance-requests">Attendance Requests</a>
+        <a href="#admin-attendance-requests">Admin: Request Approval</a>
+
+        <div class="toc-section">Leave</div>
+        <a href="#my-leave">My Leave</a>
+        <a href="#leave-application">Leave Application</a>
+        <a href="#leave-details">Leave Details</a>
+        <a href="#admin-leave">Admin: Leave Management</a>
+
+        <div class="toc-section">Disciplinary</div>
+        <a href="#my-warnings">My Warnings</a>
+        <a href="#issue-warning">Admin: Issue Warning</a>
+
+        <div class="toc-section">Profile</div>
+        <a href="#profile">Profile Page</a>
+        <a href="#edit-profile">Edit Profile</a>
+        <a href="#devices">Devices</a>
+
+        <div class="toc-section">Admin</div>
+        <a href="#admin-hub">Admin Dashboard Hub</a>
+        <a href="#admin-overview">Attendance Overview</a>
+        <a href="#attendance-report">Attendance Reports</a>
+        <a href="#violations">Violations</a>
+        <a href="#staff-directory">Staff Directory</a>
+        <a href="#staff-detail">Staff Detail</a>
+        <a href="#register-staff">Register Staff</a>
+        <a href="#password-resets">Password Reset Requests</a>
+
+        <div class="toc-section">System Admin</div>
+        <a href="#geofence">Geofence Configuration</a>
+        <a href="#network-fingerprint">Network Fingerprint</a>
+        <a href="#device-audit">Device Audit History</a>
+
+        <div class="toc-section">Settings &amp; Config</div>
+        <a href="#admin-settings">Admin Settings</a>
+        <a href="#school-profile">School Profile</a>
+        <a href="#special-holidays">Special Holidays</a>
+        <a href="#notification-settings">Notification Settings</a>
+
+        <div class="toc-section">Notifications</div>
+        <a href="#notifications">Notifications Inbox</a>
+
+        <div class="toc-section">Backend</div>
+        <a href="#database">Database Tables</a>
+        <a href="#edge-functions">Edge Functions</a>
+      </nav>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════════════════════ -->
+    <main>
+
+      <!-- ── HERO ──────────────────────────────────────────── -->
+      <div class="hero">
+        <img src="logo.png" alt="SMK Bukit Naning Logo" style="height:80px;width:auto;margin-bottom:.75rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3));display:block;">
+        <h1>eHadir@SMKBN</h1>
+        <p>Staff Attendance &amp; HR Management System — Product Manual</p>
+        <div class="hero-meta">
+          <span>Platform: Android · iOS · Windows · macOS · Linux</span>
+          <span>Stack: Flutter · Supabase · Riverpod</span>
+          <span>Manual version: 1.0 · Generated 2026-05-07</span>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+         INTRODUCTION
+    ══════════════════════════════════════════════════════ -->
+      <section id="intro">
+        <h2>Introduction</h2>
+        <p>eHadir@SMKBN is a Flutter-based staff attendance and HR management application designed for schools. It uses
+          GPS geofencing and Wi-Fi network fingerprinting to verify staff presence, and provides a full workflow for
+          leave management, disciplinary tracking, and real-time admin oversight — all backed by Supabase (PostgreSQL +
+          Auth + Realtime).</p>
+
+        <div class="info-box">
+          <strong>Entry point:</strong> <code>lib/main.dart</code> — wraps the app in <code>ProviderScope</code>,
+          initialises Supabase from <code>.env</code>, and routes to <code>LoginPage</code> or <code>MainPage</code> via
+          <code>authStateProvider</code>.
+        </div>
+        <div class="warn-box">
+          <strong>Known limitations (pre-production):</strong> Default staff passwords are hardcoded
+          (<code>eHadir{Year}!</code>). School/geofence coordinates are partially hardcoded in
+          <code>lib/core/config/</code>. Notification preferences are not yet persisted to the database.
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+         ROLES & PERMISSIONS
+    ══════════════════════════════════════════════════════ -->
+      <section id="roles">
+        <h2>Roles &amp; Permissions</h2>
+        <p>Roles are stored in the <code>profiles</code> table as lowercase strings and parsed via
+          <code>UserRole.fromString()</code> in <code>lib/features/profile/domain/models/profile_model.dart</code>.
+        </p>
+
+        <table class="matrix-table" style="margin-top:1rem;">
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>DB Value</th>
+              <th>Description</th>
+              <th>Helper</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Staff</td>
+              <td><code>staff</code></td>
+              <td>Basic attendance &amp; leave features</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Teacher</td>
+              <td><code>teacher</code></td>
+              <td>Same as staff + teacher-specific holidays</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Administrative Staff</td>
+              <td><code>administrative staff</code></td>
+              <td>Same as staff</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Administrator</td>
+              <td><code>administrator</code></td>
+              <td>Full admin dashboard, leave/warning management</td>
+              <td><code>role.isAdmin</code>, <code>role.isAnyAdmin</code></td>
+            </tr>
+            <tr>
+              <td>Principal</td>
+              <td><code>principal</code></td>
+              <td>Same as administrator</td>
+              <td><code>role.isAdmin</code>, <code>role.isAnyAdmin</code></td>
+            </tr>
+            <tr>
+              <td>System Administrator</td>
+              <td><code>system administrator</code></td>
+              <td>Full system access: geofence, network fingerprint, device audit, password resets</td>
+              <td><code>role.isSystemAdmin</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+         ROLE ACCESS MATRIX
+    ══════════════════════════════════════════════════════ -->
+      <section id="role-matrix">
+        <h2>Role Access Matrix</h2>
+        <div style="overflow-x:auto;">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Staff</th>
+                <th>Teacher</th>
+                <th>Admin Staff</th>
+                <th>Administrator</th>
+                <th>Principal</th>
+                <th>System Admin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Dashboard / Home</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Geofence Check-In/Out</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cross">✗</td>
+              </tr>
+              <tr>
+                <td>Attendance History</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cross">✗</td>
+              </tr>
+              <tr>
+                <td>Submit Attendance Requests</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cross">✗</td>
+              </tr>
+              <tr>
+                <td>Apply for Leave</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cross">✗</td>
+              </tr>
+              <tr>
+                <td>View Own Warnings</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cross">✗</td>
+              </tr>
+              <tr>
+                <td>Edit Own Profile</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>View Own Devices</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Notifications Inbox</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Admin Dashboard (Overview)</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Approve / Reject Leave</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cross">✗</td>
+              </tr>
+              <tr>
+                <td>Approve Attendance Requests</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cross">✗</td>
+              </tr>
+              <tr>
+                <td>Issue Warning Letters</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="cross">✗</td>
+              </tr>
+              <tr>
+                <td>Staff Directory &amp; Details</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Register New Staff</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Special Holidays Config</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Send Announcements</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Attendance Reports (PDF/Excel)</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Geofence Configuration</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Network Fingerprint Management</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Password Reset Requests</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Device Audit History</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+              </tr>
+              <tr>
+                <td>Set Custom Work Hours</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="cross">✗</td>
+                <td class="check">✓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- ══════════════════════════════════════════════════════
+         AUTHENTICATION
+    ══════════════════════════════════════════════════════ -->
+      <section id="auth">
+        <h2>Authentication</h2>
+
+        <!-- LOGIN -->
+        <div class="feature-card" id="login">
+          <div class="feature-card-header">
+            <h4>Login</h4>
+            <span class="badge badge-all">All users</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Authenticates a user with email/phone + password. Supports a "Remember Me"
+              toggle that persists credentials locally.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">First screen after splash (unauthenticated state)</div>
+              </div>
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">Email <em>or</em> Phone number · Password · Remember Me toggle</div>
+              </div>
+              <div>
+                <div class="field-label">Outputs</div>
+                <div class="field-value">On success: redirects to <strong>Main Page</strong>. On failure: inline error
+                  message.</div>
+              </div>
+              <div>
+                <div class="field-label">Permissions / Dependencies</div>
+                <div class="field-value">Supabase Auth · Internet access · FCM token registered on login</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/auth/presentation/pages/login_page.dart</code></li>
+              <li><code>lib/features/auth/presentation/providers/auth_provider.dart</code></li>
+              <li><code>lib/features/auth/data/repositories/remember_login_repository.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- REGISTER (SELF) -->
+        <div class="feature-card" id="register">
+          <div class="feature-card-header">
+            <h4>Self-Registration</h4>
+            <span class="badge badge-all">Unauthenticated</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Allows a new user to create their own account. Default role assigned is
+              <code>staff</code>. Requires email verification.
+            </p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Login page → "Register" link</div>
+              </div>
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">Name · Email · Password · Username · File No · Position · Phone</div>
+              </div>
+              <div>
+                <div class="field-label">Outputs</div>
+                <div class="field-value">New <code>auth.users</code> record + <code>profiles</code> row with role
+                  <code>staff</code>. Verification email sent.
+                </div>
+              </div>
+              <div>
+                <div class="field-label">Limitations</div>
+                <div class="field-value">Email must be unique. Role is always <code>staff</code> — admins use the <a
+                    href="#register-staff">Register Staff</a> page to assign other roles.</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/auth/presentation/pages/register_page.dart</code></li>
+              <li><code>lib/features/auth/data/repositories/auth_repository.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- FORGOT PASSWORD -->
+        <div class="feature-card" id="forgot-password">
+          <div class="feature-card-header">
+            <h4>Forgot Password</h4>
+            <span class="badge badge-all">Unauthenticated</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Submits a password reset request. For email accounts, a reset link is
+              emailed. For phone-registered accounts, a request is queued for system admin approval.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Login page → "Forgot password?" link</div>
+              </div>
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">Email <em>or</em> Phone number (toggle)</div>
+              </div>
+              <div>
+                <div class="field-label">Outputs</div>
+                <div class="field-value">Reset email sent (email path) <em>or</em> request logged in
+                  <code>password_reset_requests</code> table (phone path)
+                </div>
+              </div>
+              <div>
+                <div class="field-label">Dependencies</div>
+                <div class="field-value">System admin must manually approve phone-based requests via <a
+                    href="#password-resets">Password Reset Requests page</a></div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/auth/presentation/pages/forgot_password_page.dart</code></li>
+              <li><code>lib/features/auth/presentation/providers/auth_provider.dart</code> —
+                <code>passwordResetRequestProvider</code>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RESET PASSWORD -->
+        <div class="feature-card" id="reset-password">
+          <div class="feature-card-header">
+            <h4>Reset Password</h4>
+            <span class="badge badge-all">Recovery token required</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Completes the password reset flow after clicking the recovery link from
+              email.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">New password · Confirm new password</div>
+              </div>
+              <div>
+                <div class="field-label">Outputs</div>
+                <div class="field-value">Supabase auth password updated; user redirected to login</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/auth/presentation/pages/reset_password_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ONBOARDING -->
+        <div class="feature-card" id="onboarding">
+          <div class="feature-card-header">
+            <h4>Onboarding &amp; Splash Screen</h4>
+            <span class="badge badge-all">First launch only</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Displayed on first app launch. Requests required device permissions and
+              marks onboarding as complete.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Permissions Requested</div>
+                <div class="field-value">Location (precise) · Push notifications</div>
+              </div>
+              <div>
+                <div class="field-label">Outputs</div>
+                <div class="field-value">Onboarding flag saved; redirects to login page</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/onboarding/presentation/pages/onboarding_page.dart</code></li>
+              <li><code>lib/features/onboarding/presentation/pages/splash_screen.dart</code></li>
+              <li><code>lib/features/onboarding/presentation/pages/permissions_screen.dart</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- ══════════════════════════════════════════════════════
+         NAVIGATION
+    ══════════════════════════════════════════════════════ -->
+      <section id="nav-section">
+        <h2>Navigation</h2>
+
+        <div class="feature-card" id="main-nav">
+          <div class="feature-card-header">
+            <h4>Main Navigation (Bottom Tab Bar)</h4>
+            <span class="badge badge-all">All authenticated users</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Role-adaptive bottom navigation bar. Tabs rendered differ by role. Uses
+              <code>IndexedStack</code> for tab state persistence.
+            </p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Staff / Teacher / Admin Staff tabs</div>
+                <div class="field-value">Home · Attendance History · My Leave · My Warnings · Profile</div>
+              </div>
+              <div>
+                <div class="field-label">Administrator / Principal tabs</div>
+                <div class="field-value">Home · Geofence Manager · Staff Directory · Password Resets · Register Staff ·
+                  Profile</div>
+              </div>
+              <div>
+                <div class="field-label">System Admin tabs</div>
+                <div class="field-value">Same as Administrator</div>
+              </div>
+              <div>
+                <div class="field-label">Special UI</div>
+                <div class="field-value">Badge count on Home icon for unread notifications</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/navigation/presentation/pages/main_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div class="feature-card" id="dashboard">
+          <div class="feature-card-header">
+            <h4>Dashboard (Home)</h4>
+            <span class="badge badge-all">All users</span>
+            <span class="badge badge-note">System admin: view-only</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Personalized attendance overview. Shows today's check-in/out status,
+              current distance from geofence, and live activity feed. Auto-triggers the geofence check-in popup when
+              user enters the zone.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">First tab (Home) after login</div>
+              </div>
+              <div>
+                <div class="field-label">Inputs (background)</div>
+                <div class="field-value">GPS location — polled every 2 minutes while app is open</div>
+              </div>
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">Today's check-in/out times · Distance from geofence · Attendance status ·
+                  Real-time activity feed · Quick links to requests</div>
+              </div>
+              <div>
+                <div class="field-label">Limitations</div>
+                <div class="field-value">System admins see overview only; check-in button is hidden for this role</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/dashboard/presentation/pages/dashboard_page.dart</code></li>
+              <li><code>lib/features/dashboard/presentation/providers/dashboard_provider.dart</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- ══════════════════════════════════════════════════════
+         ATTENDANCE
+    ══════════════════════════════════════════════════════ -->
+      <section id="attendance-section">
+        <h2>Attendance</h2>
+
+        <!-- GEOFENCE CHECK-IN POPUP -->
+        <div class="feature-card" id="checkin-popup">
+          <div class="feature-card-header">
+            <h4>Geofence Check-In Popup</h4>
+            <span class="badge badge-staff">Staff / Teacher / Admin Staff / Admin</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Auto-triggered modal that appears when the device GPS enters the configured
+              geofence radius and the user has not yet checked in today. Allows one-tap check-in.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Trigger condition</div>
+                <div class="field-value">Distance from geofence centre ≤ configured radius AND no check-in record for
+                  today</div>
+              </div>
+              <div>
+                <div class="field-label">User actions</div>
+                <div class="field-value">Check In · Dismiss · View Details</div>
+              </div>
+              <div>
+                <div class="field-label">Output</div>
+                <div class="field-value">New row in <code>attendance</code> table · Push notification sent to user (if
+                  enabled)</div>
+              </div>
+              <div>
+                <div class="field-label">Network fingerprint check</div>
+                <div class="field-value">If trusted networks are configured, current Wi-Fi BSSID/SSID is optionally
+                  verified</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/attendance/presentation/widgets/geofence_checkin_popup.dart</code></li>
+              <li><code>lib/features/attendance/presentation/providers/attendance_provider.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ATTENDANCE HISTORY -->
+        <div class="feature-card" id="attendance-history">
+          <div class="feature-card-header">
+            <h4>Attendance History</h4>
+            <span class="badge badge-all">All users (own records)</span>
+            <span class="badge badge-admin">Admin: any staff</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Month-by-month view of attendance records. Separates incomplete records (no
+              checkout) from completed ones. Shows monthly summary metrics.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Bottom nav → "History" tab (staff) <em>or</em> Staff Detail page (admin)</div>
+              </div>
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">Month/Year selector · (Admin) select staff member</div>
+              </div>
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">Check-in/out times · Incomplete records (highlighted) · Days Present · Late
+                  Arrivals · Absences · Holiday indicators · Network fingerprint indicator</div>
+              </div>
+              <div>
+                <div class="field-label">Role note</div>
+                <div class="field-value">Teacher holidays filter differs from other staff holiday rules</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/attendance/presentation/pages/attendance_history_page.dart</code></li>
+              <li><code>lib/features/attendance/data/repositories/attendance_repository.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ATTENDANCE REQUESTS (STAFF) -->
+        <div class="feature-card" id="attendance-requests">
+          <div class="feature-card-header">
+            <h4>Attendance Requests (Staff)</h4>
+            <span class="badge badge-all">All staff</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Allows staff to submit requests for attendance exceptions. Four request
+              types are supported, each with its own form and database table.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Dashboard → quick-action button <em>or</em> History page → request button</div>
+              </div>
+              <div>
+                <div class="field-label">Request Types</div>
+                <div class="field-value">
+                  <strong>Manual Check-In</strong> — past-date check-in time<br>
+                  <strong>Manual Check-Out</strong> — past-date check-out time<br>
+                  <strong>Outstation</strong> — out-of-office with destination &amp; purpose<br>
+                  <strong>Exception</strong> — custom exception type + reason
+                </div>
+              </div>
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">Date · Time (manual) · Destination &amp; Purpose (outstation) · Exception type
+                  + reason (exception)</div>
+              </div>
+              <div>
+                <div class="field-label">Outputs</div>
+                <div class="field-value">Request row created with status <code>pending</code>; awaits admin approval
+                </div>
+              </div>
+              <div>
+                <div class="field-label">Database Tables</div>
+                <div class="field-value"><code>manual_checkin_requests</code> · <code>outstation_requests</code> ·
+                  <code>exception_requests</code>
+                </div>
+              </div>
+              <div>
+                <div class="field-label">RLS</div>
+                <div class="field-value">Staff see only own rows; admins see all rows</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/attendance_requests/presentation/pages/attendance_requests_page.dart</code></li>
+              <li><code>lib/features/attendance_requests/presentation/pages/submit_request_page.dart</code></li>
+              <li><code>lib/features/attendance_requests/data/repositories/attendance_request_repository.dart</code>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ADMIN ATTENDANCE REQUESTS -->
+        <div class="feature-card" id="admin-attendance-requests">
+          <div class="feature-card-header">
+            <h4>Admin: Attendance Request Approval</h4>
+            <span class="badge badge-admin">Administrator · Principal</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Three-tab view for admins to approve or reject pending attendance requests
+              from staff.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Admin Dashboard → Attendance tab → Requests sub-tab</div>
+              </div>
+              <div>
+                <div class="field-label">Tabs</div>
+                <div class="field-value">Manual Requests · Outstation · Exceptions</div>
+              </div>
+              <div>
+                <div class="field-label">Admin actions</div>
+                <div class="field-value">Approve (updates attendance record) · Reject (enter reason) · View details
+                </div>
+              </div>
+              <div>
+                <div class="field-label">Outputs</div>
+                <div class="field-value">Attendance record updated · Push notification sent to staff</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/admin_attendance_requests_page.dart</code></li>
+              <li><code>lib/features/attendance_requests/presentation/pages/admin_request_detail_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- ══════════════════════════════════════════════════════
+         LEAVE MANAGEMENT
+    ══════════════════════════════════════════════════════ -->
+      <section id="leave-section">
+        <h2>Leave Management</h2>
+
+        <div class="feature-card" id="my-leave">
+          <div class="feature-card-header">
+            <h4>My Leave</h4>
+            <span class="badge badge-all">All staff</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Personal leave dashboard showing balance cards and leave history.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Bottom nav → "Leave" tab</div>
+              </div>
+              <div>
+                <div class="field-label">Leave Types Displayed</div>
+                <div class="field-value">
+                  <strong>CR</strong> — Cuti Rehat (annual quota)<br>
+                  <strong>CRK</strong> — Cuti Rehat Khas (special quota)<br>
+                  <strong>CTR</strong> — Cuti Tanpa Rekod (unlimited)
+                </div>
+              </div>
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">Remaining balance · Progress bars · Recent leave history (3 visible,
+                  expandable) · Status badges (Pending / Approved / Rejected)</div>
+              </div>
+              <div>
+                <div class="field-label">Action</div>
+                <div class="field-value">FAB (Floating Action Button) → opens Leave Application page</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/leave/presentation/pages/my_leave_page.dart</code></li>
+              <li><code>lib/features/leave/presentation/providers/leave_provider.dart</code></li>
+              <li><code>lib/features/leave/data/repositories/leave_repository.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="leave-application">
+          <div class="feature-card-header">
+            <h4>Leave Application</h4>
+            <span class="badge badge-all">All staff</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Form to submit a new leave request with optional document attachment.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">Leave type (CR / CRK / CTR) · Start date · End date · Reason · Optional
+                  attachment (JPG, PDF, PNG)</div>
+              </div>
+              <div>
+                <div class="field-label">Validation</div>
+                <div class="field-value">End date must be ≥ start date. Quota balance checked for CR/CRK.</div>
+              </div>
+              <div>
+                <div class="field-label">Output</div>
+                <div class="field-value">New row in <code>leaves</code> table with status <code>pending</code>; admin
+                  notified</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/leave/presentation/pages/leave_application_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="leave-details">
+          <div class="feature-card-header">
+            <h4>Leave Details (Staff View)</h4>
+            <span class="badge badge-all">All staff (own leaves)</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Read-only detail view of a single leave request.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">Leave type · Date range · Duration · Reason · Status · Attachment ·
+                  Approval/rejection details</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/leave/presentation/pages/leave_details_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="admin-leave">
+          <div class="feature-card-header">
+            <h4>Admin: Leave Management</h4>
+            <span class="badge badge-admin">Administrator · Principal</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Two-tab view (Pending / History) for admins to process all staff leave
+              requests.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Admin Dashboard → Leave Management tab</div>
+              </div>
+              <div>
+                <div class="field-label">Admin actions</div>
+                <div class="field-value">Approve · Reject (with reason) · View history</div>
+              </div>
+              <div>
+                <div class="field-label">Search</div>
+                <div class="field-value">Filter by staff name</div>
+              </div>
+              <div>
+                <div class="field-label">Outputs</div>
+                <div class="field-value">Leave status updated · Leave balance adjusted · Push notification sent to staff
+                </div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/admin_leaves_view.dart</code></li>
+              <li><code>lib/features/admin_dashboard/presentation/pages/admin_leave_details_page.dart</code></li>
+              <li><code>lib/features/admin_dashboard/data/models/admin_leave_model.dart</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- ══════════════════════════════════════════════════════
+         DISCIPLINARY
+    ══════════════════════════════════════════════════════ -->
+      <section id="disciplinary-section">
+        <h2>Disciplinary (Warning Letters)</h2>
+
+        <div class="feature-card" id="my-warnings">
+          <div class="feature-card-header">
+            <h4>My Warnings</h4>
+            <span class="badge badge-all">All staff</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Lists all disciplinary warning letters issued to the current user.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Bottom nav → "Warnings" tab</div>
+              </div>
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">Warning date · Type/reason · Issuing administrator · Downloadable PDF link
+                </div>
+              </div>
+              <div>
+                <div class="field-label">Actions</div>
+                <div class="field-value">Pull-to-refresh · Download PDF</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/warnings/presentation/pages/my_warnings_page.dart</code></li>
+              <li><code>lib/features/warnings/data/repositories/warnings_repository.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="issue-warning">
+          <div class="feature-card-header">
+            <h4>Issue Warning Letter (Admin)</h4>
+            <span class="badge badge-admin">Administrator · Principal</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Admin bottom sheet to issue a disciplinary warning letter to a selected
+              staff member.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Admin Dashboard → Violations view → "Issue Warning" button <em>or</em> Staff
+                  Detail page</div>
+              </div>
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">Staff member selection · Warning type/description · Reason · Notification
+                  preference</div>
+              </div>
+              <div>
+                <div class="field-label">Output</div>
+                <div class="field-value">New row in <code>warnings</code> table · Optional push notification to staff
+                </div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/issue_warning_sheet.dart</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- ══════════════════════════════════════════════════════
+         PROFILE
+    ══════════════════════════════════════════════════════ -->
+      <section id="profile-section">
+        <h2>Profile &amp; Account</h2>
+
+        <div class="feature-card" id="profile">
+          <div class="feature-card-header">
+            <h4>Profile Page</h4>
+            <span class="badge badge-all">All users</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Personal overview with quick links to account management actions. Content
+              differs by role.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">Avatar · Name · Position · File No · Role badge</div>
+              </div>
+              <div>
+                <div class="field-label">Tiles (Staff)</div>
+                <div class="field-value">Edit Profile &amp; Password · Devices · Logout</div>
+              </div>
+              <div>
+                <div class="field-label">Tiles (Admin)</div>
+                <div class="field-value">Admin Dashboard · Edit Profile &amp; Password · Additional Settings · Devices ·
+                  Logout</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/profile/presentation/pages/profile_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="edit-profile">
+          <div class="feature-card-header">
+            <h4>Edit Profile</h4>
+            <span class="badge badge-all">All users</span>
+            <span class="badge badge-admin">Admin: can edit any staff</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Edit personal details and optionally change password. In admin mode, an
+              admin can edit any staff profile without needing the current password.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Editable Fields</div>
+                <div class="field-value">Name · Phone · Position · File No · Avatar (image picker)</div>
+              </div>
+              <div>
+                <div class="field-label">Password Change</div>
+                <div class="field-value">Current password required (self-edit) · New password · Confirm new password ·
+                  Strength validation</div>
+              </div>
+              <div>
+                <div class="field-label">Admin Mode</div>
+                <div class="field-value">Current password not required; can update role-level fields</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/profile/presentation/pages/edit_profile_page.dart</code></li>
+              <li><code>lib/features/profile/data/repositories/profile_repository.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="devices">
+          <div class="feature-card-header">
+            <h4>Devices</h4>
+            <span class="badge badge-all">All users</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Lists devices that have logged into the current user's account. Shows
+              flagged/suspicious devices.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Profile → "Devices"</div>
+              </div>
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">Device name/model · Last login date/time · Flagged status</div>
+              </div>
+              <div>
+                <div class="field-label">Actions</div>
+                <div class="field-value">View device details · Revoke device access</div>
+              </div>
+              <div>
+                <div class="field-label">Database</div>
+                <div class="field-value"><code>device_logins</code> table (RLS: own rows)</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/devices/presentation/pages/devices_page.dart</code></li>
+              <li><code>lib/features/devices/data/repositories/device_repository.dart</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- ══════════════════════════════════════════════════════
+         ADMIN DASHBOARD
+    ══════════════════════════════════════════════════════ -->
+      <section id="admin-section">
+        <h2>Admin Dashboard</h2>
+
+        <div class="feature-card" id="admin-hub">
+          <div class="feature-card-header">
+            <h4>Admin Dashboard Hub</h4>
+            <span class="badge badge-admin">Administrator · Principal · System Admin</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Central admin control panel with five tabs, accessible from the Profile
+              page (for admins) or via the bottom nav.</p>
+            <div class="field-label" style="margin-bottom:.4rem;">Tabs</div>
+            <div class="feature-grid">
+              <div>
+                <div class="field-value"><strong>1. Admin Dashboard</strong> — real-time overview &amp; analytics</div>
+              </div>
+              <div>
+                <div class="field-value"><strong>2. Leave Management</strong> — approve/reject leave requests</div>
+              </div>
+              <div>
+                <div class="field-value"><strong>3. Attendance</strong> — reports &amp; violations</div>
+              </div>
+              <div>
+                <div class="field-value"><strong>4. Staff Directory</strong> — manage all staff</div>
+              </div>
+              <div>
+                <div class="field-value"><strong>5. Settings</strong> — school &amp; system configuration</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/main_admin_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="admin-overview">
+          <div class="feature-card-header">
+            <h4>Attendance Overview (Admin)</h4>
+            <span class="badge badge-admin">Administrator · Principal</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Real-time attendance analytics for any selected date, with a live activity
+              feed.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">Date picker (defaults to today)</div>
+              </div>
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">Total staff · Present · Late · Absent · Live feed of check-ins/check-outs ·
+                  Recent requests/approvals</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/admin_dashboard_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="attendance-report">
+          <div class="feature-card-header">
+            <h4>Attendance Reports</h4>
+            <span class="badge badge-admin">Administrator · Principal</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Generate monthly attendance summaries and export as PDF or Excel.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Admin Dashboard → Attendance tab → Reports</div>
+              </div>
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">Month · Year</div>
+              </div>
+              <div>
+                <div class="field-label">Report Contents</div>
+                <div class="field-value">Days present · Late count · Absence count · Exemptions · Per-staff summary
+                  cards</div>
+              </div>
+              <div>
+                <div class="field-label">Quick Reports</div>
+                <div class="field-value">Late Arrivals · Absences · Violations (individual report buttons)</div>
+              </div>
+              <div>
+                <div class="field-label">Export Formats</div>
+                <div class="field-value">PDF · Excel (.xlsx)</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/attendance_report_view.dart</code></li>
+              <li><code>lib/features/admin_dashboard/services/pdf_report_generator.dart</code></li>
+              <li><code>lib/features/admin_dashboard/services/excel_report_generator.dart</code></li>
+              <li><code>lib/features/admin_dashboard/services/attendance_report_service.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="violations">
+          <div class="feature-card-header">
+            <h4>Violations View</h4>
+            <span class="badge badge-admin">Administrator · Principal</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Monitor attendance policy violations (late arrivals, absences). Allows
+              immediate warning letter issuance.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">Violation count · Staff name · Violation type · Date/time</div>
+              </div>
+              <div>
+                <div class="field-label">Actions</div>
+                <div class="field-value">Issue Warning · View details</div>
+              </div>
+              <div>
+                <div class="field-label">Search</div>
+                <div class="field-value">Real-time search by staff name</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/violations_view.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="staff-directory">
+          <div class="feature-card-header">
+            <h4>Staff Directory</h4>
+            <span class="badge badge-admin">Administrator · Principal · System Admin</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Searchable list of all staff with real-time on-site/off-site status
+              indicators.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Admin Dashboard → Staff Directory tab <em>or</em> bottom nav (admin role)</div>
+              </div>
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">Name · Position/role · ON-SITE/OFF-SITE status · Check-in/out status · Avatar
+                </div>
+              </div>
+              <div>
+                <div class="field-label">Filters</div>
+                <div class="field-value">Search by name · Filter by role</div>
+              </div>
+              <div>
+                <div class="field-label">Actions</div>
+                <div class="field-value">Tap row → Staff Detail page</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/staff_directory_view.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="staff-detail">
+          <div class="feature-card-header">
+            <h4>Staff Detail</h4>
+            <span class="badge badge-admin">Administrator · Principal · System Admin</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Comprehensive profile for a single staff member — attendance, leaves,
+              warnings, and requests all in one view.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Sections</div>
+                <div class="field-value">Profile header · Quick actions · Work hours (system admin) · Leave history ·
+                  Attendance requests · Warning letters</div>
+              </div>
+              <div>
+                <div class="field-label">Quick Actions</div>
+                <div class="field-value">Edit profile · View attendance history</div>
+              </div>
+              <div>
+                <div class="field-label">Report Toggle</div>
+                <div class="field-value">"Include in report" checkbox for report generation</div>
+              </div>
+              <div>
+                <div class="field-label">Work Hours</div>
+                <div class="field-value">System admin can set custom start/end times per staff; defaults are Teacher
+                  07:30–14:00, Others 08:00–17:00</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/staff_detail_page.dart</code></li>
+              <li><code>lib/features/admin_dashboard/presentation/widgets/work_hours_card.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="register-staff">
+          <div class="feature-card-header">
+            <h4>Register Staff</h4>
+            <span class="badge badge-admin">Administrator · Principal · System Admin</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Admin-only staff account creation. Assigns role, generates a temporary
+              password.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Bottom nav (admin role) → "Register" tab</div>
+              </div>
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">Full Name · Username · Email · Phone · File No · Position · Role (dropdown)
+                </div>
+              </div>
+              <div>
+                <div class="field-label">Auto-Generated</div>
+                <div class="field-value">Temporary password: <code>eHadir{Year}!</code> — shown once on success page
+                </div>
+              </div>
+              <div>
+                <div class="field-label">Output</div>
+                <div class="field-value">New <code>auth.users</code> + <code>profiles</code> row · Success page shows
+                  credentials to share with new staff</div>
+              </div>
+              <div>
+                <div class="field-label">Limitation</div>
+                <div class="field-value">Password is hardcoded formula — must be changed before production</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/register_staff_page.dart</code></li>
+              <li><code>lib/features/admin_dashboard/presentation/pages/registration_success_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="password-resets">
+          <div class="feature-card-header">
+            <h4>Password Reset Requests</h4>
+            <span class="badge badge-sysadmin">System Administrator only</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Queue of staff password reset requests (phone-path flow) awaiting system
+              admin approval.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Bottom nav → "Resets" tab</div>
+              </div>
+              <div>
+                <div class="field-label">Tabs</div>
+                <div class="field-value">Pending · Completed</div>
+              </div>
+              <div>
+                <div class="field-label">Admin actions</div>
+                <div class="field-value">Approve (generate &amp; send reset link) · Reject</div>
+              </div>
+              <div>
+                <div class="field-label">Database</div>
+                <div class="field-value"><code>password_reset_requests</code> table</div>
+              </div>
+              <div>
+                <div class="field-label">Edge Function</div>
+                <div class="field-value"><code>admin-reset-password</code></div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/password_reset_requests_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- ══════════════════════════════════════════════════════
+         SYSTEM ADMIN
+    ══════════════════════════════════════════════════════ -->
+      <section id="sysadmin-section">
+        <h2>System Administrator Features</h2>
+
+        <div class="feature-card" id="geofence">
+          <div class="feature-card-header">
+            <h4>Geofence Configuration</h4>
+            <span class="badge badge-sysadmin">System Administrator only</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Interactive map to define the attendance geofence boundary. Uses
+              OpenStreetMap tiles (Flutter Map) and the Nominatim API for address search.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Bottom nav → "Geofence" tab</div>
+              </div>
+              <div>
+                <div class="field-label">Controls</div>
+                <div class="field-value">Address search · Tap map to place centre · Radius slider (0–1000 m, default 300
+                  m) · Zoom in/out · Current location button</div>
+              </div>
+              <div>
+                <div class="field-label">External API</div>
+                <div class="field-value">Nominatim OSM API for geocoding address search queries</div>
+              </div>
+              <div>
+                <div class="field-label">Output</div>
+                <div class="field-value">Geofence saved to <code>geofences</code> table (lat, lng, radius)</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/edit_geofence_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="network-fingerprint">
+          <div class="feature-card-header">
+            <h4>Network Fingerprint Management</h4>
+            <span class="badge badge-sysadmin">System Administrator only</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Manages a list of trusted Wi-Fi networks used to supplement GPS geofence
+              verification during check-in. Stores SSID + BSSID pairs.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Admin Settings → Network Fingerprint</div>
+              </div>
+              <div>
+                <div class="field-label">Actions</div>
+                <div class="field-value">Auto-scan current network · Add network · Delete trusted network · View trusted
+                  list</div>
+              </div>
+              <div>
+                <div class="field-label">Data Captured</div>
+                <div class="field-value">Wi-Fi SSID · BSSID (MAC address)</div>
+              </div>
+              <div>
+                <div class="field-label">Usage at Check-In</div>
+                <div class="field-value">App compares current Wi-Fi BSSID against <code>network_fingerprints</code>
+                  table. Shown as verification indicator in Attendance History.</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/network_fingerprint_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="device-audit">
+          <div class="feature-card-header">
+            <h4>Device Audit History</h4>
+            <span class="badge badge-sysadmin">System Administrator only</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Organisation-wide audit of device login events. Allows flagging of
+              suspicious devices.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Admin Settings → Device History</div>
+              </div>
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">Staff name · Device model · Login time · Flagged status · Location (if
+                  available)</div>
+              </div>
+              <div>
+                <div class="field-label">Actions</div>
+                <div class="field-value">Flag device as suspicious · View review history</div>
+              </div>
+              <div>
+                <div class="field-label">Database</div>
+                <div class="field-value"><code>device_logins</code> table</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/admin_device_history_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- ══════════════════════════════════════════════════════
+         SETTINGS & CONFIG
+    ══════════════════════════════════════════════════════ -->
+      <section id="settings-section">
+        <h2>Admin Settings &amp; Configuration</h2>
+
+        <div class="feature-card" id="admin-settings">
+          <div class="feature-card-header">
+            <h4>Admin Settings View</h4>
+            <span class="badge badge-admin">Administrator (limited) · System Admin (full)</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Settings hub inside the Admin Dashboard. Sub-sections navigate to dedicated
+              pages.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Sections (All Admins)</div>
+                <div class="field-value">School Profile · Special Holidays · Notification Settings</div>
+              </div>
+              <div>
+                <div class="field-label">Sections (System Admin only)</div>
+                <div class="field-value">Network Fingerprint · Device History</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/admin_settings_view.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="school-profile">
+          <div class="feature-card-header">
+            <h4>School Profile</h4>
+            <span class="badge badge-admin">Administrator (read-only)</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Displays the school's identity information. Currently read-only; values are
+              sourced from a hardcoded config file.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Displays</div>
+                <div class="field-value">School logo · Name · Code · Contact info</div>
+              </div>
+              <div>
+                <div class="field-label">Limitation</div>
+                <div class="field-value">Hardcoded in <code>lib/core/config/school_profile.dart</code> — no DB-driven
+                  editing yet (marked for productionisation)</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/school_profile_page.dart</code></li>
+              <li><code>lib/core/config/school_profile.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="special-holidays">
+          <div class="feature-card-header">
+            <h4>Special Holidays</h4>
+            <span class="badge badge-admin">Administrator · Principal</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Manage custom holidays that suppress attendance violations for the
+              configured date ranges.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Admin Settings → Special Holidays</div>
+              </div>
+              <div>
+                <div class="field-label">Inputs (Add Holiday)</div>
+                <div class="field-value">Date range · Holiday name · Applicable groups: All Staff <em>or</em> Teachers
+                  Only</div>
+              </div>
+              <div>
+                <div class="field-label">Actions</div>
+                <div class="field-value">Add · Delete · View sorted list</div>
+              </div>
+              <div>
+                <div class="field-label">Effect</div>
+                <div class="field-value">Attendance records on holiday dates are excluded from violation calculations
+                  and marked with holiday indicator in History view</div>
+              </div>
+              <div>
+                <div class="field-label">Database</div>
+                <div class="field-value"><code>special_holidays</code> table</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/special_holidays_page.dart</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature-card" id="notification-settings">
+          <div class="feature-card-header">
+            <h4>Notification / Announcement Settings</h4>
+            <span class="badge badge-admin">Administrator · Principal</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">Compose and send push-notification announcements to all staff, a specific
+              role, or an individual staff member.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Admin Settings → Notification Settings</div>
+              </div>
+              <div>
+                <div class="field-label">Target Options</div>
+                <div class="field-value">All · By role (Staff / Teacher / Administrator / Principal) · Individual
+                  (select from list)</div>
+              </div>
+              <div>
+                <div class="field-label">Inputs</div>
+                <div class="field-value">Announcement title · Message body</div>
+              </div>
+              <div>
+                <div class="field-label">Output</div>
+                <div class="field-value">Notification row saved to <code>notifications</code> table · Push delivered via
+                  FCM</div>
+              </div>
+            </div>
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/admin_dashboard/presentation/pages/notification_settings_page.dart</code></li>
+              <li><code>lib/core/services/fcm_service.dart</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- ══════════════════════════════════════════════════════
+         NOTIFICATIONS
+    ══════════════════════════════════════════════════════ -->
+      <section id="notifications-section">
+        <h2>Notifications</h2>
+
+        <div class="feature-card" id="notifications">
+          <div class="feature-card-header">
+            <h4>Notifications Inbox</h4>
+            <span class="badge badge-all">All users</span>
+          </div>
+          <div class="feature-body">
+            <p style="margin-bottom:.75rem;">In-app notification centre showing all system-generated and admin-sent
+              messages.</p>
+            <div class="feature-grid">
+              <div>
+                <div class="field-label">Where</div>
+                <div class="field-value">Home tab → bell icon (badge shows unread count)</div>
+              </div>
+              <div>
+                <div class="field-label">Sections</div>
+                <div class="field-value">Unread (newest first) · Earlier (read)</div>
+              </div>
+              <div>
+                <div class="field-label">Actions</div>
+                <div class="field-value">Tap to view detail · Mark all read · Individual mark read</div>
+              </div>
+            </div>
+
+            <div class="field-label" style="margin-top:.9rem;">Notification Event Types</div>
+            <table class="matrix-table" style="margin-top:.5rem;">
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th>Triggered By</th>
+                  <th>Recipient</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Auto check-in</td>
+                  <td>Geofence check-in</td>
+                  <td>Staff member</td>
+                </tr>
+                <tr>
+                  <td>Auto check-out</td>
+                  <td>EOD / timeout</td>
+                  <td>Staff member</td>
+                </tr>
+                <tr>
+                  <td>Leave approved/rejected</td>
+                  <td>Admin action</td>
+                  <td>Staff member</td>
+                </tr>
+                <tr>
+                  <td>Warning letter issued</td>
+                  <td>Admin action</td>
+                  <td>Staff member</td>
+                </tr>
+                <tr>
+                  <td>Attendance request processed</td>
+                  <td>Admin action</td>
+                  <td>Staff member</td>
+                </tr>
+                <tr>
+                  <td>Clock-in reminder</td>
+                  <td>Scheduled function</td>
+                  <td>Staff member</td>
+                </tr>
+                <tr>
+                  <td>Checkout reminder</td>
+                  <td>Scheduled function</td>
+                  <td>Staff member</td>
+                </tr>
+                <tr>
+                  <td>Announcement</td>
+                  <td>Admin compose</td>
+                  <td>All / by role / individual</td>
+                </tr>
+                <tr>
+                  <td>Password reset request (new)</td>
+                  <td>Staff request</td>
+                  <td>System admin</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="warn-box" style="margin-top:.75rem;">
+              <strong>WIP:</strong> Notification preferences (auto check-in notify, checkout reminder, etc.) are defined
+              in <code>profiles</code> but are not yet persisted back to the database from the UI.
+            </div>
+
+            <div class="field-label" style="margin-top:.9rem;">Relevant Files</div>
+            <ul class="path-list">
+              <li><code>lib/features/notifications/presentation/pages/notifications_page.dart</code></li>
+              <li><code>lib/features/notifications/data/repositories/notification_repository.dart</code></li>
+              <li><code>lib/core/services/fcm_service.dart</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <!-- ══════════════════════════════════════════════════════
+         DATABASE
+    ══════════════════════════════════════════════════════ -->
+      <section id="database">
+        <h2>Database Tables</h2>
+        <p>All tables are in Supabase PostgreSQL with Row-Level Security (RLS) enabled.</p>
+
+        <table class="matrix-table" style="margin-top:1rem;">
+          <thead>
+            <tr>
+              <th>Table</th>
+              <th>Purpose</th>
+              <th>RLS Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>profiles</code></td>
+              <td>User profile, role, work hours, notification prefs</td>
+              <td>Own row (staff); all rows (admin)</td>
+            </tr>
+            <tr>
+              <td><code>attendance</code></td>
+              <td>Daily check-in/check-out records</td>
+              <td>Own rows (staff); all rows (admin)</td>
+            </tr>
+            <tr>
+              <td><code>leaves</code></td>
+              <td>Leave applications and balance</td>
+              <td>Own rows (staff); all rows (admin)</td>
+            </tr>
+            <tr>
+              <td><code>warnings</code></td>
+              <td>Disciplinary warning letters</td>
+              <td>Own rows (staff); all rows (admin)</td>
+            </tr>
+            <tr>
+              <td><code>geofences</code></td>
+              <td>Geofence boundary definition</td>
+              <td>Read: all; Write: system admin</td>
+            </tr>
+            <tr>
+              <td><code>special_holidays</code></td>
+              <td>Holiday date ranges</td>
+              <td>Read: all; Write: admin</td>
+            </tr>
+            <tr>
+              <td><code>network_fingerprints</code></td>
+              <td>Trusted Wi-Fi SSID/BSSID pairs</td>
+              <td>Read: all; Write: system admin</td>
+            </tr>
+            <tr>
+              <td><code>notifications</code></td>
+              <td>In-app notifications</td>
+              <td>Own rows (staff); all rows (admin)</td>
+            </tr>
+            <tr>
+              <td><code>device_logins</code></td>
+              <td>Device login audit trail</td>
+              <td>Own rows (staff); all rows (system admin)</td>
+            </tr>
+            <tr>
+              <td><code>manual_checkin_requests</code></td>
+              <td>Manual check-in requests</td>
+              <td>Own rows (staff); all rows (admin)</td>
+            </tr>
+            <tr>
+              <td><code>outstation_requests</code></td>
+              <td>Outstation/out-of-office requests</td>
+              <td>Own rows (staff); all rows (admin)</td>
+            </tr>
+            <tr>
+              <td><code>exception_requests</code></td>
+              <td>Attendance exception requests</td>
+              <td>Own rows (staff); all rows (admin)</td>
+            </tr>
+            <tr>
+              <td><code>password_reset_requests</code></td>
+              <td>Password reset approval queue</td>
+              <td>Own row (staff); all rows (system admin)</td>
+            </tr>
+            <tr>
+              <td><code>notify_prefs</code></td>
+              <td>Per-user notification preferences</td>
+              <td>Own row only</td>
+            </tr>
+            <tr>
+              <td><code>notify_prefs_defaults</code></td>
+              <td>School-wide default notification preferences</td>
+              <td>Read: all; Write: admin</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+         EDGE FUNCTIONS
+    ══════════════════════════════════════════════════════ -->
+      <section id="edge-functions">
+        <h2>Supabase Edge Functions</h2>
+        <p>Server-side functions invoked from the Flutter app for operations requiring elevated privileges.</p>
+
+        <table class="matrix-table" style="margin-top:1rem;">
+          <thead>
+            <tr>
+              <th>Function</th>
+              <th>Purpose</th>
+              <th>Caller</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>admin-reset-password</code></td>
+              <td>Generate and send a password reset link to a staff member</td>
+              <td>System admin (Password Reset Requests page)</td>
+            </tr>
+            <tr>
+              <td><code>admin-remove-staff</code></td>
+              <td>Deactivate / delete a staff account from Supabase Auth</td>
+              <td>Admin</td>
+            </tr>
+            <tr>
+              <td><code>admin-set-staff-status</code></td>
+              <td>Set a staff member's active/inactive status</td>
+              <td>Admin</td>
+            </tr>
+            <tr>
+              <td><code>send-push-notification</code></td>
+              <td>Deliver FCM push notification to device(s)</td>
+              <td>Internal (triggered by various workflows)</td>
+            </tr>
+            <tr>
+              <td><code>send-reminders</code></td>
+              <td>Scheduled clock-in and checkout reminder notifications</td>
+              <td>Cron / scheduled trigger</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-box" style="margin-top:1rem;">
+          Edge functions use the Supabase service-role key server-side, keeping it off the device. The Flutter app calls
+          them via the Supabase Functions client using the anon key.
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Highlight active TOC link on scroll
+    const sections = document.querySelectorAll('[id]');
+    const tocLinks = document.querySelectorAll('#toc a');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          const a = document.querySelector('#toc a[href="#' + e.target.id + '"]');
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    sections.forEach(s => obs.observe(s));
+  </script>
+</body>
+
+</html>
