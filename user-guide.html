@@ -442,6 +442,28 @@
       background: var(--white)
     }
 
+    /* ── DOWNLOAD PAGE ── */
+    .download-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 3.5rem 1.5rem 4rem;
+      gap: 1.25rem;
+    }
+    .qr-big {
+      width: 280px;
+      height: 280px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 24px rgba(0,0,0,.12);
+    }
+    .download-page h2 { font-size: 1.4rem; font-weight: 800; color: var(--brand-dark); }
+    .download-page p  { font-size: .95rem; color: var(--muted); max-width: 340px; line-height: 1.6; }
+    .dl-link { font-size: .9rem; font-weight: 700; color: var(--brand); text-decoration: underline; }
+    .dl-link:hover { color: var(--brand-dark); }
+    .role-btn[data-role="download"].active { background: var(--brand-dark); }
+
     @media(max-width:600px) {
       .site-header h1 {
         font-size: 1.6rem
@@ -478,6 +500,7 @@
       <button class="role-btn" data-role="admin" data-i18n="role-admin">Administrator</button>
       <button class="role-btn" data-role="principal" data-i18n="role-principal">Principal</button>
       <button class="role-btn" data-role="sysadmin" data-i18n="role-sysadmin">System Admin</button>
+      <button class="role-btn" data-role="download" data-i18n="role-download">Download App</button>
       <div class="nav-spacer"></div>
       <div class="lang-toggle">
         <span id="lbl-en" class="active-lang">EN</span>
@@ -897,6 +920,16 @@
       </div>
     </section>
 
+    <!-- ═══ DOWNLOAD ═══ -->
+    <section class="role-section" data-role="download">
+      <div class="download-page">
+        <img src="apk-qr-code.png" alt="Scan to download eHadir Pro APK" class="qr-big">
+        <h2 data-i18n="dl-title">Download eHadir App</h2>
+        <p data-i18n="dl-desc">Point your phone camera at the QR code above to download and install the eHadir app APK directly on your Android device.</p>
+        <a href="https://drive.google.com/drive/folders/1BwX2CxaGw1EeH2S2WYPi_6jGLZVHWjjh?usp=drive_link" target="_blank" rel="noopener" class="dl-link" data-i18n="dl-link">Or click this link</a>
+      </div>
+    </section>
+
   </div>
 
   <footer>
@@ -917,7 +950,13 @@
         "role-admin": "Administrator",
         "role-principal": "Principal",
         "role-sysadmin": "System Admin",
+        "role-download": "Download App",
+        "dl-title": "Download eHadir App",
+        "dl-desc": "Point your phone camera at the QR code above to download and install the eHadir app APK directly on your Android device.",
+        "dl-link": "Or click this link",
         "footer": "eHadir@SMKBN · Staff Attendance & HR Management · User Guide v1.0 · Muhammad Asyraaf · 2026",
+        "qr-label": "Scan to download the app",
+        "qr-sub":   "Point your phone camera at the QR code to download the APK",
 
         /* ── shared group labels ── */
         "grp-start": "Getting Started",
@@ -1244,7 +1283,13 @@
         "role-admin": "Pentadbir",
         "role-principal": "Pengetua",
         "role-sysadmin": "Pent. Sistem",
+        "role-download": "Muat Turun",
+        "dl-title": "Muat Turun Aplikasi eHadir",
+        "dl-desc": "Arahkan kamera telefon anda ke kod QR di atas untuk memuat turun dan memasang APK aplikasi eHadir terus pada peranti Android anda.",
+        "dl-link": "Atau klik pautan ini",
         "footer": "eHadir@SMKBN · Kehadiran Kakitangan & Pengurusan HR · Panduan Pengguna v1.0",
+        "qr-label": "Imbas untuk muat turun aplikasi",
+        "qr-sub":   "Arahkan kamera telefon anda ke kod QR untuk muat turun APK",
 
         "grp-start": "Permulaan",
         "grp-daily": "Kehadiran Harian",
